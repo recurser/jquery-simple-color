@@ -1,0 +1,65 @@
+
+h2. About
+
+_jQuery Simple Color_ is a very simple color-picker plugin that displays a square grid of colors to select from. I found a lot of the other color-picker plugins quite heavy, so I ended up writing this to provide a dead-simple alternative. The list of colors it uses can be customized, and the layout size etc can be configured to a certain extent. _jQuery Simple Color_ is licensed under the "MIT license":http://www.opensource.org/licenses/mit-license.php .
+
+h2. Installation
+
+You'll need to download the "jQuery library":http://docs.jquery.com/Downloading_jQuery#Current_Release , and include it before jquery.simple-color.js in your HTML source. See the _examples_ folder for examples.
+
+h2. Usage
+
+
+
+
+
+
+
+h2. Building From Scratch
+
+You can build the regular, un-minified version simply by running _ant_:
+
+{% highlight bash %}
+$ ant
+Buildfile: build.xml
+
+jquery.simple-color:
+     [echo] Building ./jquery.simple-color.js
+     [echo] ./jquery.simple-color.js built.
+
+BUILD SUCCESSFUL
+Total time: 0 seconds
+{% endhighlight %}
+
+Before you can build the minified version yourself, you'll need to download the "Google Closure Compiler":http://closure-compiler.googlecode.com/files/compiler-latest.zip and put it in a folder called _build_:
+
+{% highlight bash %}
+$ mkdir build
+$ cd build
+$ wget http://closure-compiler.googlecode.com/files/compiler-latest.zip
+$ unzip compiler-latest.zip
+{% endhighlight %}
+
+Once you have the compiler, you can build the minified version by running _ant min_:
+
+{% highlight bash %}
+$ ant min
+Buildfile: build.xml
+
+jquery.simple-color:
+     [echo] Building ./jquery.simple-color.js
+     [echo] ./jquery.simple-color.js built.
+
+min:
+     [echo] Building ./jquery.simple-color.min.js
+    [apply] Applied java to 1 file and 0 directories.
+   [delete] Deleting: /Users/dave/Documents/Code/jquery/jquery-simple-color/tmpmin
+     [echo] ./jquery.simple-color.min.js built.
+
+BUILD SUCCESSFUL
+Total time: 2 seconds
+{% endhighlight %}
+
+h2. Bug Reports
+
+If you come across any problems, please "create a ticket":http://recursive-design.com/code/p/jquery-simple-color/issues/ and I'll try to get it fixed as soon as possible.
