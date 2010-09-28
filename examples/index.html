@@ -8,7 +8,9 @@
 
 <script  type="text/javascript">
 $(document).ready(function(){
-	$('.simple_color').simpleColor({
+	$('.simple_color').simpleColor();
+	
+	$('.simple_color_custom').simpleColor({
 			cellWidth: 9,
 			cellHeight: 9,
 			border: '1px solid #333333',
@@ -16,8 +18,9 @@ $(document).ready(function(){
 	});
 	
 	$('input#alert_button').click( function() {
-		alert($('input.simple_color')[0].value)
+		alert($('input.simple_color_custom')[0].value)
 	});
+	
 });
 </script>
 <style type="text/css">
@@ -38,6 +41,12 @@ $(document).ready(function(){
 
 <body>
 	<input class='simple_color' value='#cc3333'/>    
+	
+	<br/>
+	
+	<input class='simple_color_custom' value='#cc3333'/>    
+	
     <input type='button' id='alert_button' value='Show Value'/>
+    
 </body>
 </html>

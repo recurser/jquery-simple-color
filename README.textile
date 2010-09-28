@@ -1,7 +1,7 @@
 
 h2. About
 
-_jQuery Simple Color_ is a very simple color-picker plugin that displays a square grid of colors to select from. I found a lot of the other color-picker plugins quite heavy, so I ended up writing this to provide a dead-simple alternative. The list of colors it uses can be customized, and the layout size etc can be configured to a certain extent. _jQuery Simple Color_ is licensed under the "MIT license":http://www.opensource.org/licenses/mit-license.php .
+_jQuery Simple Color_ is a very simple color-picker plugin that displays a square grid of selectable colors. I found a lot of the other color-picker plugins quite heavy, so I ended up writing this to provide a dead-simple alternative. The list of colors it uses can be customized, and the layout size etc can be configured to a certain extent. _jQuery Simple Color_ is licensed under the "MIT license":http://www.opensource.org/licenses/mit-license.php .
 
 !/images/projects/jquery-simple-color/Simple_Color_Closed.png!
 
@@ -13,11 +13,66 @@ You'll need to download the "jQuery library":http://docs.jquery.com/Downloading_
 
 h2. Usage
 
+_Simple Color_ transparently converts regular text input fields into color pickers. Firstly, add a text element:
 
+{% highlight html %}
+<input class='simple_color' value='#cc3333'/>
+{% endhighlight %}
 
+_Simple Color_ will automatically pick up the _value_ attribute and display it as the default color. 
 
+Next, use the _simpleColor()_ function on _$(document).ready_ to set up the color picker :
 
+{% highlight javascript %}
+$('.simple_color').simpleColor();
+{% endhighlight %}
 
+You can use any valid jQuery selector instead of '.simple_color' if you wish. _Simple Color_ also supports various options to customize the color picker :
+
+{% highlight javascript %}
+$('.simple_color').simpleColor({
+		cellWidth: 9,
+		cellHeight: 9,
+		border: '1px solid #333333',
+		buttonClass: 'button'
+});
+{% endhighlight %}
+
+h2. Options
+
+{% highlight javascript %}
+ *  colors:       An array of colors to include in the color picker.
+ *
+ *  defaultColor: Default (initially selected) color
+ *                 default value: '#FFF'
+ *
+ *  buttonClass:  CSS class to include in buttons. 
+ *                 default value: ''
+ *
+ *  border:       CSS border properties
+ *                 default value: '1px solid #000'
+ *
+ *  cellWidth:    Width of each individual color cell
+ *                 default value: 10
+ *
+ *  cellHeight:   Height of each individual color cell
+ *                 default value: 10
+ *
+ *  cellMargin:   Margin of each individual color cell
+ *                 default value: 1
+ *
+ *  boxWidth:     Width of the color display box
+ *                 default value: 115px
+ *
+ *  boxHeight:    Height of the color display box
+ *                 default value: 20px
+ *
+ *  columns:      Number of columns to display. Color order may look strange if this is altered
+ *                 default value: 16
+ *
+ *  insert:       The position to insert the color picker. 'before' or 'after'
+ *                 default value: 'after'
+{% endhighlight %}
 
 h2. Building From Scratch
 

@@ -16,8 +16,13 @@
  *
  * If an options Object is provided, the following attributes are supported:
  *
+ *  colors:       An array of colors to include in the color picker.
+ *
  *  defaultColor: Default (initially selected) color
  *                 default value: '#FFF'
+ *
+ *  buttonClass:  CSS class to include in buttons. 
+ *                 default value: ''
  *
  *  border:       CSS border properties
  *                 default value: '1px solid #000'
