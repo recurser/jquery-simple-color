@@ -126,4 +126,4 @@ Total time: 2 seconds
 
 h2. Bug Reports
 
-If you come across any problems, please "create a ticket":http://recursive-design.com/code/p/jquery-simple-color/issues/ and I'll try to get it fixed as soon as possible.
+If you come across any problems, please "create a ticket":http://recursive-design.com/code/p/jquery-simple-color/issues/ and we'll try to get it fixed as soon as possible.
