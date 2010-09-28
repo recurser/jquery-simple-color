@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-jp" />
+<title>jQuery SimpleColor Plugin</title>
+<script type="text/javascript" src="jquery-1.4.2.js"></script>
+<script type="text/javascript" src="../jquery.simple-color.min.js"></script>
+
+<script  type="text/javascript">
+$(document).ready(function(){
+	$('.simple_color').simpleColor({
+			cellWidth: 9,
+			cellHeight: 9,
+			border: '1px solid #333333',
+			buttonClass: 'button'
+	});
+	
+	$('input#alert_button').click( function() {
+		alert($('input.simple_color')[0].value)
+	});
+});
+</script>
+<style type="text/css">
+	input#alert_button {
+		display: block;
+		margin-top: 20px;
+	}
+	
+	.simpleColorDisplay {
+		float: left;
+	}
+	
+	.button {
+		clear: right;
+	}
+</style>
+</head>
+
+<body>
+	<input class='simple_color' value='#cc3333'/>    
+    <input type='button' id='alert_button' value='Show Value'/>
+</body>
+</html>
