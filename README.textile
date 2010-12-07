@@ -66,25 +66,33 @@ boxWidth:           Width of the color display box.
 boxHeight:          Height of the color display box.
                      default value: 20px
 
-columns:            Number of columns to display. Color order may look strange if this is altered.
+columns:            Number of columns to display. Color order may look 
+                    strange if this is altered.
                      default value: 16
 
-insert:             The position to insert the color picker. 'before' or 'after'.
+insert:             The position to insert the color picker. 'before' or 
+                    'after'.
                      default value: 'after'
 
-buttonClass:        A custom CSS class to add to the button, if you want to add some custom styling.
+buttonClass:        A custom CSS class to add to the button, if you want to 
+                    add some custom styling.
                      default value: ''
 
-colors:             An array of colors to display, if you want to customize the default color set.
+colors:             An array of colors to display, if you want to 
+                    customize the default color set.
                      default value: default color set - see 'default_colors' below.
 
-displayColorCode:   Display the color code (eg #333333) as text inside the button. true or false.
+displayColorCode:   Display the color code (eg #333333) as text inside 
+                    the button. true or false.
                      default value: false
 
-colorCodeAlign:     Text alignment used to display the color code inside the button. Only used if 'displayColorCode' is true. 'left', 'center' or 'right'
+colorCodeAlign:     Text alignment used to display the color code inside 
+                    the button. Only used if 'displayColorCode' is true. 
+                    'left', 'center' or 'right'
                      default value: 'center'
 
-colorCodeColor:     Text color of the color code inside the button. Only used if 'displayColorCode' is true.
+colorCodeColor:     Text color of the color code inside the button. Only 
+                    used if 'displayColorCode' is true.
                      default value: '#FFF'
 {% endhighlight %}
 
