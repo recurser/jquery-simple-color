@@ -14,11 +14,12 @@ $(document).ready(function(){
 			cellWidth: 9,
 			cellHeight: 9,
 			border: '1px solid #333333',
-			buttonClass: 'button'
+			buttonClass: 'button',
+			displayColorCode: true
 	});
 	
 	$('input#alert_button').click( function() {
-		alert($('input.simple_color_custom')[0].value)
+		alert($('input.simple_color_custom')[0].value);
 	});
 	
 });

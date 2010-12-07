@@ -45,38 +45,47 @@ $('.simple_color').simpleColor({
 h2. Options
 
 {% highlight javascript %}
-colors:       An array of colors to include in the color picker.
+defaultColor:       Default (initially selected) color.
+                     default value: '#FFF'
 
-defaultColor: Default (initially selected) color
-               default value: '#FFF'
+border:             CSS border properties.
+                     default value: '1px solid #000'
 
-buttonClass:  CSS class to include in buttons. 
-               default value: ''
+cellWidth:          Width of each individual color cell.
+                     default value: 10
 
-border:       CSS border properties
-               default value: '1px solid #000'
+cellHeight:         Height of each individual color cell.
+                     default value: 10
 
-cellWidth:    Width of each individual color cell
-               default value: 10
+cellMargin:         Margin of each individual color cell.
+                     default value: 1
 
-cellHeight:   Height of each individual color cell
-               default value: 10
+boxWidth:           Width of the color display box.
+                     default value: 115px
 
-cellMargin:   Margin of each individual color cell
-               default value: 1
+boxHeight:          Height of the color display box.
+                     default value: 20px
 
-boxWidth:     Width of the color display box
-               default value: 115px
+columns:            Number of columns to display. Color order may look strange if this is altered.
+                     default value: 16
 
-boxHeight:    Height of the color display box
-               default value: 20px
+insert:             The position to insert the color picker. 'before' or 'after'.
+                     default value: 'after'
 
-columns:      Number of columns to display. Color order may look strange 
-              if this is altered.
-               default value: 16
+buttonClass:        A custom CSS class to add to the button, if you want to add some custom styling.
+                     default value: ''
 
-insert:       The position to insert the color picker. 'before' or 'after'
-               default value: 'after'
+colors:             An array of colors to display, if you want to customize the default color set.
+                     default value: default color set - see 'default_colors' below.
+
+displayColorCode:   Display the color code (eg #333333) as text inside the button.
+                     default value: false
+
+colorCodeAlign:     Text alignment used to display the color code inside the button. Only used if 'displayColorCode' is true.
+                     default value: 'center'
+
+colorCodeColor:     Text color of the color code inside the button. Only used if 'displayColorCode' is true.
+                     default value: '#FFF'
 {% endhighlight %}
 
 h2. Building From Scratch

@@ -16,32 +16,47 @@
  *
  * If an options Object is provided, the following attributes are supported:
  *
- *  defaultColor: Default (initially selected) color
- *                 default value: '#FFF'
+ *  defaultColor:       Default (initially selected) color.
+ *                       default value: '#FFF'
  *
- *  border:       CSS border properties
- *                 default value: '1px solid #000'
+ *  border:             CSS border properties.
+ *                       default value: '1px solid #000'
  *
- *  cellWidth:    Width of each individual color cell
- *                 default value: 10
+ *  cellWidth:          Width of each individual color cell.
+ *                       default value: 10
  *
- *  cellHeight:   Height of each individual color cell
- *                 default value: 10
+ *  cellHeight:         Height of each individual color cell.
+ *                       default value: 10
  *
- *  cellMargin:   Margin of each individual color cell
- *                 default value: 1
+ *  cellMargin:         Margin of each individual color cell.
+ *                       default value: 1
  *
- *  boxWidth:     Width of the color display box
- *                 default value: 115px
+ *  boxWidth:           Width of the color display box.
+ *                       default value: 115px
  *
- *  boxHeight:    Height of the color display box
- *                 default value: 20px
+ *  boxHeight:          Height of the color display box.
+ *                       default value: 20px
  *
- *  columns:      Number of columns to display. Color order may look strange if this is altered
- *                 default value: 16
+ *  columns:            Number of columns to display. Color order may look strange if this is altered.
+ *                       default value: 16
  *
- *  insert:       The position to insert the color picker. 'before' or 'after'
- *                 default value: 'after'
+ *  insert:             The position to insert the color picker. 'before' or 'after'.
+ *                       default value: 'after'
+ *
+ *  buttonClass:        A custom CSS class to add to the button, if you want to add some custom styling.
+ *                       default value: ''
+ *
+ *  colors:             An array of colors to display, if you want to customize the default color set.
+ *                       default value: default color set - see 'default_colors' below.
+ *
+ *  displayColorCode:   Display the color code (eg #333333) as text inside the button.
+ *                       default value: false
+ *
+ *  colorCodeAlign:     Text alignment used to display the color code inside the button. Only used if 'displayColorCode' is true.
+ *                       default value: 'center'
+ *
+ *  colorCodeColor:     Text color of the color code inside the button. Only used if 'displayColorCode' is true.
+ *                       default value: '#FFF'            
  */
     $.fn.simpleColor = function(options) {
 	
@@ -77,17 +92,21 @@
 		
     	// Option defaults
         options = $.extend({
-            defaultColor:  this.attr('defaultColor') || '#FFF',
-            border:        this.attr('border') || '1px solid #000',
-            cellWidth:     this.attr('cellWidth') || 10,
-            cellHeight:    this.attr('cellHeight') || 10,
-            cellMargin:    this.attr('cellMargin') || 1,
-            boxWidth:      this.attr('boxWidth') || '115px',
-            boxHeight:     this.attr('boxHeight') || '20px',
-            columns:       this.attr('columns') || 16,
-            insert:        this.attr('insert') || 'after',
-            buttonClass:   this.attr('buttonClass') || '',
-            colors:        this.attr('colors') || default_colors
+            defaultColor:     this.attr('defaultColor') || '#FFF',
+            border:           this.attr('border') || '1px solid #000',
+            cellWidth:        this.attr('cellWidth') || 10,
+            cellHeight:       this.attr('cellHeight') || 10,
+            cellMargin:       this.attr('cellMargin') || 1,
+            boxWidth:         this.attr('boxWidth') || '115px',
+            boxHeight:        this.attr('boxHeight') || '20px',
+            columns:          this.attr('columns') || 16,
+            insert:           this.attr('insert') || 'after',
+            buttonClass:      this.attr('buttonClass') || '',
+            colors:           this.attr('colors') || default_colors,
+            displayColorCode: this.attr('displayColorCode') || false,
+            colorCodeAlign:   this.attr('colorCodeAlign') || 'center',
+            colorCodeColor:   this.attr('colorCodeColor') || '#FFF'
+            
         }, options || {});
 	
     	// Hide the input
@@ -129,6 +148,13 @@
     		display_box.css('width',           options.boxWidth);
     		display_box.css('height',          options.boxHeight);
     		container.append(display_box);
+            
+            // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
+            if (options.displayColorCode) {
+    		    display_box.text(this.value);
+    		    display_box.css('color',     options.colorCodeColor);
+    		    display_box.css('textAlign', options.colorCodeAlign);
+    		}
 		
     		// Create the select button 
     		var select_button = $("<input type='button' value='Select'" + 
@@ -196,6 +222,11 @@
     								event.data.cancel_button.hide();
     								event.data.display_box.show();
     								event.data.select_button.show();
+            
+                                    // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
+                                    if (options.displayColorCode) {
+                            		    event.data.display_box.text('#' + this.id);
+                        		    }
     							}
     						);
     					}
