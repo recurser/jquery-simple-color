@@ -49,10 +49,10 @@
  *  colors:             An array of colors to display, if you want to customize the default color set.
  *                       default value: default color set - see 'default_colors' below.
  *
- *  displayColorCode:   Display the color code (eg #333333) as text inside the button.
+ *  displayColorCode:   Display the color code (eg #333333) as text inside the button. true or false.
  *                       default value: false
  *
- *  colorCodeAlign:     Text alignment used to display the color code inside the button. Only used if 'displayColorCode' is true.
+ *  colorCodeAlign:     Text alignment used to display the color code inside the button. Only used if 'displayColorCode' is true. 'left', 'center' or 'right'
  *                       default value: 'center'
  *
  *  colorCodeColor:     Text color of the color code inside the button. Only used if 'displayColorCode' is true.
