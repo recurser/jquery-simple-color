@@ -3,7 +3,7 @@
     
     <tstamp />
     
-    <loadfile property="version" srcfile="version.txt"/>
+    <loadfile property="version" srcfile="VERSION"/>
     
     <property description="Folder for jquery.simple-color and min target" name="dist" value="."/>
     <property name="JQS" value="${dist}/jquery.simple-color.js"/>
