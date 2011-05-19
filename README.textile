@@ -23,7 +23,7 @@ First, add a text element:
 
 _Simple Color_ will automatically pick up the _value_ attribute and display it as the default color. 
 
-Once you have one or more text elements set up, just use the _simpleColor()_ function to set up the color picker :
+Once you have one or more text elements set up, just use the _simpleColor()_ function to set up the color picker:
 
 {% highlight javascript %}
 $('.simple_color').simpleColor();
@@ -31,7 +31,7 @@ $('.simple_color').simpleColor();
 
 You can use any valid jQuery selector instead of '.simple_color' if you wish. 
 
-_Simple Color_ also supports various options to customize the color picker :
+_Simple Color_ also supports various options to customize the color picker:
 
 {% highlight javascript %}
 $('.simple_color').simpleColor({
@@ -143,4 +143,27 @@ Total time: 2 seconds
 
 h2. Bug Reports
 
-If you come across any problems, please "create a ticket":http://recursive-design.com/code/p/jquery-simple-color/issues/ and we'll try to get it fixed as soon as possible.
+If you come across any problems, please "create a ticket":https://github.com/recurser/jquery-simple-color/issues and we'll try to get it fixed as soon as possible.
+
+
+h2. Contributing
+
+Once you've made your commits:
+
+1. "Fork":http://help.github.com/fork-a-repo/ jquery-simple-color
+2. Create a topic branch - `git checkout -b my_branch`
+3. Push to your branch - `git push origin my_branch`
+4. Create a "Pull Request":http://help.github.com/pull-requests/ from your branch
+5. That's it!
+
+
+h2. Author
+
+Dave Perrett :: mail@recursive-design.com :: "@recurser":http://twitter.com/recurser
+
+
+h2. Copyright
+
+Copyright (c) 2010 Dave Perrett. See "License":https://github.com/recurser/jquery-simple-color/blob/master/LICENSE for details.
+
+
