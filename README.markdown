@@ -1,50 +1,54 @@
 
-h2. About
+About
+-----
 
-_jQuery Simple Color_ is a very simple color-picker plugin that displays a square grid of selectable colors. I found a lot of the other color-picker plugins quite heavy, so I ended up writing this to provide a dead-simple alternative. The list of colors it uses can be customized, and the layout size etc can be configured to a certain extent. _jQuery Simple Color_ is licensed under the "MIT license":http://www.opensource.org/licenses/mit-license.php .
+_jQuery Simple Color_ is a very simple color-picker plugin that displays a square grid of selectable colors. I found a lot of the other color-picker plugins quite heavy, so I ended up writing this to provide a dead-simple alternative. The list of colors it uses can be customized, and the layout size etc can be configured to a certain extent. _jQuery Simple Color_ is licensed under the [MIT license](http://www.opensource.org/licenses/mit-license.php).
 
-!http://recursive-design.com/images/projects/jquery-simple-color/Simple_Color_Closed.png!
+![Simple Color Closed](http://recursive-design.com/images/projects/jquery-simple-color/Simple_Color_Closed.png)
 
-!http://recursive-design.com/images/projects/jquery-simple-color/Simple_Color_Open.png!
+![Simple Color Open](http://recursive-design.com/images/projects/jquery-simple-color/Simple_Color_Open.png)
 
-h2. Installation
+Installation
+------------
 
-You'll need to download the "jQuery library":http://docs.jquery.com/Downloading_jQuery#Current_Release , and include it before _jquery.simple-color.js_ in your HTML source. See the _examples_ folder for examples.
+You'll need to download the [jQuery library](http://docs.jquery.com/Downloading_jQuery#Current_Release), and include it before _jquery.simple-color.js_ in your HTML source. See the _examples_ folder for examples.
 
-h2. Usage
+Usage
+-----
 
 _Simple Color_ transparently converts regular text input fields into color pickers. 
 
 First, add a text element:
 
-{% highlight html %}
+```html
 <input class='simple_color' value='#cc3333'/>
-{% endhighlight %}
+```
 
 _Simple Color_ will automatically pick up the _value_ attribute and display it as the default color. 
 
 Once you have one or more text elements set up, just use the _simpleColor()_ function to set up the color picker:
 
-{% highlight javascript %}
+```javascript
 $('.simple_color').simpleColor();
-{% endhighlight %}
+```
 
 You can use any valid jQuery selector instead of '.simple_color' if you wish. 
 
 _Simple Color_ also supports various options to customize the color picker:
 
-{% highlight javascript %}
+```javascript
 $('.simple_color').simpleColor({
 		cellWidth: 9,
 		cellHeight: 9,
 		border: '1px solid #333333',
 		buttonClass: 'button'
 });
-{% endhighlight %}
+```
 
-h2. Options
+Options
+-------
 
-{% highlight javascript %}
+```javascript
 defaultColor:       Default (initially selected) color.
                      default value: '#FFF'
 
@@ -94,13 +98,14 @@ colorCodeAlign:     Text alignment used to display the color code inside
 colorCodeColor:     Text color of the color code inside the button. Only 
                     used if 'displayColorCode' is true.
                      default value: '#FFF'
-{% endhighlight %}
+```
 
-h2. Building From Scratch
+Building From Scratch
+---------------------
 
 You can build the regular, un-minified version simply by running _ant_:
 
-{% highlight bash %}
+```bash
 $ ant
 Buildfile: build.xml
 
@@ -110,20 +115,20 @@ jquery.simple-color:
 
 BUILD SUCCESSFUL
 Total time: 0 seconds
-{% endhighlight %}
+```
 
-Before you can build the minified version yourself, you'll need to download the "Google Closure Compiler":http://closure-compiler.googlecode.com/files/compiler-latest.zip and put it in a folder called _build_:
+Before you can build the minified version yourself, you'll need to download the [Google Closure Compiler](http://closure-compiler.googlecode.com/files/compiler-latest.zip) and put it in a folder called _build_:
 
-{% highlight bash %}
+```bash
 $ mkdir build
 $ cd build
 $ wget http://closure-compiler.googlecode.com/files/compiler-latest.zip
 $ unzip compiler-latest.zip
-{% endhighlight %}
+```
 
 Once you have the compiler, you can build the minified version by running _ant min_:
 
-{% highlight bash %}
+```bash
 $ ant min
 Buildfile: build.xml
 
@@ -139,31 +144,35 @@ min:
 
 BUILD SUCCESSFUL
 Total time: 2 seconds
-{% endhighlight %}
+```
 
-h2. Bug Reports
+Bug Reports
+-----------
 
-If you come across any problems, please "create a ticket":https://github.com/recurser/jquery-simple-color/issues and we'll try to get it fixed as soon as possible.
+If you come across any problems, please [create a ticket](https://github.com/recurser/jquery-simple-color/issues) and we'll try to get it fixed as soon as possible.
 
 
-h2. Contributing
+Contributing
+------------
 
 Once you've made your commits:
 
-1. "Fork":http://help.github.com/fork-a-repo/ jquery-simple-color
+1. [Fork](http://help.github.com/fork-a-repo/) jquery-simple-color
 2. Create a topic branch - `git checkout -b my_branch`
 3. Push to your branch - `git push origin my_branch`
-4. Create a "Pull Request":http://help.github.com/pull-requests/ from your branch
+4. Create a [Pull Request](http://help.github.com/pull-requests/) from your branch
 5. That's it!
 
 
-h2. Author
+Author
+------
 
-Dave Perrett :: mail@recursive-design.com :: "@recurser":http://twitter.com/recurser
+Dave Perrett :: mail@recursive-design.com :: [@recurser](http://twitter.com/recurser)
 
 
-h2. Copyright
+Copyright
+---------
 
-Copyright (c) 2010 Dave Perrett. See "License":https://github.com/recurser/jquery-simple-color/blob/master/LICENSE for details.
+Copyright (c) 2010 Dave Perrett. See [License](https://github.com/recurser/jquery-simple-color/blob/master/LICENSE) for details.
 
 
