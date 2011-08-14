@@ -216,6 +216,7 @@
     								display_box: display_box}, 
     							function(event) {
     								event.data.input.value = '#' + this.id;
+    								$(event.data.input).change();
     								event.data.display_box.css('backgroundColor', '#' + this.id);
     								event.data.chooser.hide();
     								event.data.cancel_button.hide();
