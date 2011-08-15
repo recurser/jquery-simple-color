@@ -144,7 +144,14 @@ min:
 
 BUILD SUCCESSFUL
 Total time: 2 seconds
-```
+
+
+Change history
+-----------
+
+* **Version 1.0.1 (2011-08-15)** : Trigger change() event when a color is selected (thanks [firstclown](https://github.com/firstclown)), and make colored display box clickable to select colors.
+* **Version 1.0.0 (2011-05-21)** : 1.0 release.
+
 
 Bug Reports
 -----------
@@ -176,3 +183,4 @@ Copyright
 Copyright (c) 2010 Dave Perrett. See [License](https://github.com/recurser/jquery-simple-color/blob/master/LICENSE) for details.
 
 
+firstclown
