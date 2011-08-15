@@ -144,6 +144,7 @@ min:
 
 BUILD SUCCESSFUL
 Total time: 2 seconds
+```
 
 
 Change history
