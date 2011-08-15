@@ -184,4 +184,3 @@ Copyright
 Copyright (c) 2010 Dave Perrett. See [License](https://github.com/recurser/jquery-simple-color/blob/master/LICENSE) for details.
 
 
-firstclown
