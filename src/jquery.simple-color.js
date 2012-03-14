@@ -142,6 +142,7 @@
             display_box.css('border',          options.border);
             display_box.css('width',           options.boxWidth);
             display_box.css('height',          options.boxHeight);
+			display_box.css('line-height',     options.boxHeight); /* make sure that the code is vertically centered */
             display_box.css('cursor',          'pointer');
             container.append(display_box);
             
