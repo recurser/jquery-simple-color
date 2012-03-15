@@ -7,7 +7,7 @@
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Version: 1.0.1 (201108151520)
+ * Version: @VERSION (@DATE)
  */
  (function($) {
 /**
@@ -41,9 +41,6 @@
  *
  *  insert:             The position to insert the color picker. 'before' or 'after'.
  *                       default value: 'after'
- *
- *  buttonClass:        A custom CSS class to add to the button, if you want to add some custom styling.
- *                       default value: ''
  *
  *  colors:             An array of colors to display, if you want to customize the default color set.
  *                       default value: default color set - see 'default_colors' below.
@@ -125,63 +122,51 @@
         // each() function but i'm not sure how
         $.simpleColorOptions = options;
 
-
-
         function buildSelector(index) {
 
-            var options = $.simpleColorOptions;
+            options = $.simpleColorOptions;
 
             // Create a container to hold everything
-            var container = $("<div class='simpleColorContainer' />");
+            var container = $("<div class='simpleColorContainer' />")
+								.css('position', 'relative'); /* absolutely positioned child elements now "work" */
 
             // Create the color display box
             var default_color = (this.value && this.value != '') ? this.value : options.defaultColor;
 
             var display_box = $("<div class='simpleColorDisplay' />");
-            display_box.css('backgroundColor', default_color);
-            display_box.css('border',          options.border);
-            display_box.css('width',           options.boxWidth);
-            display_box.css('height',          options.boxHeight);
-            display_box.css('cursor',          'pointer');
+            display_box.css({'backgroundColor': default_color,
+            				'border':          options.border,
+				            'width':           options.boxWidth,
+				            'height':          options.boxHeight,
+							'line-height':     options.boxHeight, /* make sure that the code is vertically centered */
+				            'cursor':          'pointer'})
             container.append(display_box);
             
             // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
             if (options.displayColorCode) {
                 display_box.text(this.value);
-                display_box.css('color',     options.colorCodeColor);
-                display_box.css('textAlign', options.colorCodeAlign);
+                display_box.css({'color':     options.colorCodeColor,
+                				'textAlign': options.colorCodeAlign});
             }
-
-            // Create the select button 
-            var select_button = $("<input type='button' value='Select'" + 
-                                  " class='simpleColorSelectButton "+options.buttonClass+"'>");
-            container.append(select_button);
-
-            // Create the cancel button
-            var cancel_button = $("<input type='button' value='Cancel'" + 
-                                  " class='simpleColorCancelButton "+options.buttonClass+"'>");
-                                  
-            container.append(cancel_button);
-            cancel_button.hide();
             
             var select_callback = function (event) {
-               event.data.select_button.hide();
-               event.data.cancel_button.show();
 
                // Use an existing chooser if there is one
                if (event.data.container.chooser) {
-                   event.data.container.chooser.show();
+                   event.data.container.chooser.toggle();
             
                // Build the chooser
                } else {
 
                    // Make a chooser div to hold the cells
                    var chooser = $("<div class='simpleColorChooser'/>");
-                   chooser.css('border',  options.border);
-                   chooser.css('margin',  '0px');
-                   chooser.css('margin-top',  '3px');
-                   chooser.css('width',   options.totalWidth + 'px');
-                   chooser.css('height',  options.totalHeight + 'px');
+                   chooser.css({'border':  options.border,
+			                   'margin':  '0 0 0 5px',
+			                   'width':   options.totalWidth,
+			                   'height':  options.totalHeight,
+							   'top':  0,
+							   'left': options.boxWidth,
+							   'position': 'absolute'});
             
                    event.data.container.chooser = chooser;
                    event.data.container.append(chooser);
@@ -189,30 +174,26 @@
                    // Create the cells
                    for (var i=0; i<options.colors.length; i++) {
                        var cell = $("<div class='simpleColorCell' id='" + options.colors[i] + "'/>");
-                       cell.css('width',           options.cellWidth + 'px');
-                       cell.css('height',          options.cellHeight + 'px');
-                       cell.css('margin',          options.cellMargin + 'px');
-                       cell.css('cursor',          'pointer');
-                       cell.css('lineHeight',      options.cellHeight + 'px');
-                       cell.css('fontSize',        '1px');
-                       cell.css('float',           'left');
-                       cell.css('backgroundColor', '#'+options.colors[i]);
+                       cell.css({'width':           options.cellWidth + 'px',
+                       			'height':          options.cellHeight + 'px',
+			                    'margin':          options.cellMargin + 'px',
+			                    'cursor':          'pointer',
+			                    'lineHeight':      options.cellHeight + 'px',
+			                    'fontSize':        '1px',
+			                    'float':           'left',
+			                    'backgroundColor': '#'+options.colors[i]});
                        chooser.append(cell);
 
                        cell.bind('click', {
                                input: event.data.input, 
                                chooser: chooser, 
-                               select_button: select_button, 
-                               cancel_button: cancel_button, 
                                display_box: display_box}, 
                            function(event) {
                                event.data.input.value = '#' + this.id;
                                $(event.data.input).change();
                                event.data.display_box.css('backgroundColor', '#' + this.id);
                                event.data.chooser.hide();
-                               event.data.cancel_button.hide();
                                event.data.display_box.show();
-                               event.data.select_button.show();
        
                                // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
                                if (options.displayColorCode) {
@@ -227,35 +208,28 @@
            var callback_params = {
                container: container, 
                input: this, 
-               cancel_button: cancel_button, 
-               display_box: display_box, 
-               select_button: select_button
+               display_box: display_box
            };
-
-           // Bind the select button to display the chooser.
-           select_button.bind('click', callback_params, select_callback);
 
            // Also bind the display box button to display the chooser.
            display_box.bind('click', callback_params, select_callback);
-
-           // Bind the cancel button to hide the chooser
-           cancel_button.bind('click', {
-               container: container, 
-                select_button: select_button, 
-                display_box: display_box}, 
-                function (event) {
-                    $(this).hide();
-                    event.data.container.find('.simpleColorChooser').hide();
-                    event.data.display_box.show();
-                    event.data.select_button.show();
-                }
-            );
 
             $(this).after(container);
 
         };
 
         this.each(buildSelector);
+
+		$('html').click(function(){
+			$('.simpleColorChooser').hide();
+		});
+		
+		$('.simpleColorDisplay').each(function(){
+			
+			$(this).click(function(e){
+				e.stopPropagation();
+			});
+		});
 
         return this;
     };
@@ -266,10 +240,8 @@
     $.fn.closeSelector = function() {
         this.each( function(index) {
             var container = $(this).parent().find('div.simpleColorContainer');
-            container.find('.simpleColorCancelButton').hide();
             container.find('.simpleColorChooser').hide();
             container.find('.simpleColorDisplay').show();
-            container.find('.simpleColorSelectButton').show();
         });
 
         return this;
