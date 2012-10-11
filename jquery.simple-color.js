@@ -7,7 +7,7 @@
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Version: 1.0.1 (201108151520)
+ * Version: 1.0.1 (201108151520) - modifed by https://github.com/MikleSol/jquery-simple-color
  */
  (function($) {
 /**
@@ -44,6 +44,9 @@
  *
  *  buttonClass:        A custom CSS class to add to the button, if you want to add some custom styling.
  *                       default value: ''
+ *
+ *  buttonDisplay:      Display Select and Cancel buttom.
+ *                       default value: true
  *
  *  colors:             An array of colors to display, if you want to customize the default color set.
  *                       default value: default color set - see 'default_colors' below.
@@ -101,6 +104,7 @@
             columns:          this.attr('columns') || 16,
             insert:           this.attr('insert') || 'after',
             buttonClass:      this.attr('buttonClass') || '',
+            buttonDisplay:    this.attr('buttonDisplay') || true,
             colors:           this.attr('colors') || default_colors,
             displayColorCode: this.attr('displayColorCode') || false,
             colorCodeAlign:   this.attr('colorCodeAlign') || 'center',
@@ -151,22 +155,21 @@
                 display_box.css('color',     options.colorCodeColor);
                 display_box.css('textAlign', options.colorCodeAlign);
             }
-
-            // Create the select button 
-            var select_button = $("<input type='button' value='Select'" + 
-                                  " class='simpleColorSelectButton "+options.buttonClass+"'>");
-            container.append(select_button);
-
-            // Create the cancel button
-            var cancel_button = $("<input type='button' value='Cancel'" + 
-                                  " class='simpleColorCancelButton "+options.buttonClass+"'>");
-                                  
-            container.append(cancel_button);
-            cancel_button.hide();
+            if(options.buttonDisplay == true){
+      				// Create the select button 
+      				var select_button = $("<input type='button' value='Select' class='simpleColorSelectButton "+options.buttonClass+"'>");
+      				container.append(select_button);
+      				// Create the cancel button
+      				var cancel_button = $("<input type='button' value='Cancel' class='simpleColorCancelButton "+options.buttonClass+"'>");
+      				container.append(cancel_button);
+      				cancel_button.hide();
+      			}
             
             var select_callback = function (event) {
-               event.data.select_button.hide();
-               event.data.cancel_button.show();
+      				 if(options.buttonDisplay == true){
+      					   event.data.select_button.hide();
+      				 	   event.data.cancel_button.show();
+      				 }
 
                // Use an existing chooser if there is one
                if (event.data.container.chooser) {
@@ -210,9 +213,11 @@
                                $(event.data.input).change();
                                event.data.display_box.css('backgroundColor', '#' + this.id);
                                event.data.chooser.hide();
-                               event.data.cancel_button.hide();
                                event.data.display_box.show();
-                               event.data.select_button.show();
+                               if(options.buttonDisplay == true){
+                                   event.data.cancel_button.hide();
+                                   event.data.select_button.show();
+                           	   }
        
                                // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
                                if (options.displayColorCode) {
@@ -231,26 +236,24 @@
                display_box: display_box, 
                select_button: select_button
            };
-
-           // Bind the select button to display the chooser.
-           select_button.bind('click', callback_params, select_callback);
-
-           // Also bind the display box button to display the chooser.
-           display_box.bind('click', callback_params, select_callback);
-
+           if(options.buttonDisplay == true){
+				      // Bind the select button to display the chooser.
+				      select_button.bind('click', callback_params, select_callback);
+				      cancel_button.bind('click', {
+	               container: container, 
+	                select_button: select_button, 
+	                display_box: display_box}, 
+	                function (event) {
+	                    $(this).hide();
+	                    event.data.container.find('.simpleColorChooser').hide();
+	                    event.data.display_box.show();
+	                    event.data.select_button.show();
+	                }
+	            );
+			}
+			// Also bind the display box button to display the chooser.
+			display_box.bind('click', callback_params, select_callback);
            // Bind the cancel button to hide the chooser
-           cancel_button.bind('click', {
-               container: container, 
-                select_button: select_button, 
-                display_box: display_box}, 
-                function (event) {
-                    $(this).hide();
-                    event.data.container.find('.simpleColorChooser').hide();
-                    event.data.display_box.show();
-                    event.data.select_button.show();
-                }
-            );
-
             $(this).after(container);
 
         };

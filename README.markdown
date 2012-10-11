@@ -82,6 +82,9 @@ buttonClass:        A custom CSS class to add to the button, if you want to
                     add some custom styling.
                      default value: ''
 
+buttonDisplay:      Display Select and Cancel buttom.
+                     default value: true
+
 colors:             An array of colors to display, if you want to 
                     customize the default color set.
                      default value: default color set - see 'default_colors' below.
