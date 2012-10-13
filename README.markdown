@@ -16,7 +16,7 @@ You'll need to download the [jQuery library](http://docs.jquery.com/Downloading_
 Usage
 -----
 
-_Simple Color_ transparently converts regular text input fields into color pickers. 
+_Simple Color_ transparently converts regular text input fields into color pickers.
 
 First, add a text element:
 
@@ -24,7 +24,7 @@ First, add a text element:
 <input class='simple_color' value='#cc3333'/>
 ```
 
-_Simple Color_ will automatically pick up the _value_ attribute and display it as the default color. 
+_Simple Color_ will automatically pick up the _value_ attribute and display it as the default color.
 
 Once you have one or more text elements set up, just use the _simpleColor()_ function to set up the color picker:
 
@@ -32,16 +32,16 @@ Once you have one or more text elements set up, just use the _simpleColor()_ fun
 $('.simple_color').simpleColor();
 ```
 
-You can use any valid jQuery selector instead of '.simple_color' if you wish. 
+You can use any valid jQuery selector instead of '.simple_color' if you wish.
 
 _Simple Color_ also supports various options to customize the color picker:
 
 ```javascript
 $('.simple_color').simpleColor({
-		cellWidth: 9,
-		cellHeight: 9,
-		border: '1px solid #333333',
-		buttonClass: 'button'
+    cellWidth: 9,
+    cellHeight: 9,
+    border: '1px solid #333333',
+    buttonClass: 'button'
 });
 ```
 
@@ -70,32 +70,32 @@ boxWidth:           Width of the color display box.
 boxHeight:          Height of the color display box.
                      default value: 20px
 
-columns:            Number of columns to display. Color order may look 
+columns:            Number of columns to display. Color order may look
                     strange if this is altered.
                      default value: 16
 
-insert:             The position to insert the color picker. 'before' or 
+insert:             The position to insert the color picker. 'before' or
                     'after'.
                      default value: 'after'
 
-buttonClass:        A custom CSS class to add to the button, if you want to 
+buttonClass:        A custom CSS class to add to the button, if you want to
                     add some custom styling.
                      default value: ''
 
-colors:             An array of colors to display, if you want to 
+colors:             An array of colors to display, if you want to
                     customize the default color set.
                      default value: default color set - see 'default_colors' below.
 
-displayColorCode:   Display the color code (eg #333333) as text inside 
+displayColorCode:   Display the color code (eg #333333) as text inside
                     the button. true or false.
                      default value: false
 
-colorCodeAlign:     Text alignment used to display the color code inside 
-                    the button. Only used if 'displayColorCode' is true. 
+colorCodeAlign:     Text alignment used to display the color code inside
+                    the button. Only used if 'displayColorCode' is true.
                     'left', 'center' or 'right'
                      default value: 'center'
 
-colorCodeColor:     Text color of the color code inside the button. Only 
+colorCodeColor:     Text color of the color code inside the button. Only
                     used if 'displayColorCode' is true.
                      default value: '#FFF'
 ```
@@ -150,6 +150,7 @@ Total time: 2 seconds
 Change history
 -----------
 
+* **Version 1.1.0 (2012-10-14)** : Remove select and cancel buttons (thanks [wesnolte](https://github.com/wesnolte)).
 * **Version 1.0.1 (2011-08-15)** : Trigger change() event when a color is selected (thanks [firstclown](https://github.com/firstclown)), and make colored display box clickable to select colors.
 * **Version 1.0.0 (2011-05-21)** : 1.0 release.
 
