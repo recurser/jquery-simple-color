@@ -41,7 +41,10 @@ $('.simple_color').simpleColor({
     cellWidth: 9,
     cellHeight: 9,
     border: '1px solid #333333',
-    buttonClass: 'button'
+    buttonClass: 'button',
+    callback: function(hex) {
+        alert("color picked! " + hex)
+    }
 });
 ```
 
@@ -98,6 +101,11 @@ colorCodeAlign:     Text alignment used to display the color code inside
 colorCodeColor:     Text color of the color code inside the button. Only
                     used if 'displayColorCode' is true.
                      default value: '#FFF'
+
+callback:           Function to be called when a color is selected. The
+                    hex code is passed into the function.
+                     default value: null
+
 ```
 
 Building From Scratch
