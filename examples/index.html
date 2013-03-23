@@ -15,11 +15,15 @@ $(document).ready(function(){
 			cellHeight: 9,
 			border: '1px solid #333333',
 			buttonClass: 'button',
-			displayColorCode: true
+			displayColorCode: true,
+
+			callback: function( hex ) {
+				alert(hex);
+			}
 	});
 	
 	$('input#alert_button').click( function() {
-		alert($('input.simple_color_custom')[0].value);
+		alert($('input.simple_color')[0].value);
 	});
 	
 });
