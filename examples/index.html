@@ -8,45 +8,62 @@
 
 <script  type="text/javascript">
 $(document).ready(function(){
-	$('.simple_color').simpleColor();
-	
-	$('.simple_color_custom').simpleColor({
-			cellWidth: 9,
-			cellHeight: 9,
-			border: '1px solid #333333',
-			buttonClass: 'button',
-			displayColorCode: true
-	});
-	
-	$('input#alert_button').click( function() {
-		alert($('input.simple_color_custom')[0].value);
-	});
-	
+  $('.simple_color').simpleColor();
+
+  $('.simple_color_color_code').simpleColor({ displayColorCode: true });
+
+  $('.simple_color_custom_cell_size').simpleColor({ cellWidth: 30, cellHeight: 10 });
+
+  $('.simple_color_callback').simpleColor({
+      callback: function( hex ) {
+        alert("You selected #" + hex);
+      }
+  });
+
+  $('.simple_color_kitchen_sink').simpleColor({
+      cellWidth: 20,
+      cellHeight: 20,
+      border: '1px solid #660033',
+      buttonClass: 'button',
+      displayColorCode: true,
+      callback: function( hex ) {
+        alert("You selected #" + hex);
+      }
+  });
+
 });
 </script>
 <style type="text/css">
-	input#alert_button {
-		display: block;
-		margin-top: 20px;
-	}
-	
-	.simpleColorDisplay {
-		font-family: Helvetica;
-		margin: 10px 0;
-	}
-	
-	.button {
-		clear: right;
-	}
+  input#alert_button {
+    display: block;
+    margin-top: 20px;
+  }
+
+  .simpleColorDisplay {
+    font-family: Helvetica;
+    margin: 10px 0;
+  }
+
+  .button {
+    clear: right;
+  }
 </style>
 </head>
 
 <body>
-	<input class='simple_color' value='#cc3333'/>    
-	
-	<input class='simple_color_custom' value='#cc3333'/>    
-	
-    <input type='button' id='alert_button' value='Show Value'/>
-    
+  <h3>Basic</h3>
+  <input class='simple_color' value='#cc3333'/>
+
+  <h3>Display Color Code</h3>
+  <input class='simple_color_color_code' value='#33cc33'/>
+
+  <h3>Custom Cell Size</h3>
+  <input class='simple_color_custom_cell_size' value='#cc9966'/>
+
+  <h3>With Callback</h3>
+  <input class='simple_color_callback' value='#cc3333'/>
+
+  <h3>Kitchen Sink</h3>
+  <input class='simple_color_kitchen_sink' value='#993300'/>
 </body>
 </html>
