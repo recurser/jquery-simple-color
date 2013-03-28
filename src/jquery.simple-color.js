@@ -52,7 +52,10 @@
  *                      Default value: 'center'
  *
  *  colorCodeColor:     Text color of the color code inside the button. Only used if 'displayColorCode' is true.
- *                      Default value: '#FFF'            
+ *                      Default value: '#FFF'
+ *
+ *  callback:           Callback function to call after a color has been chosen.
+ *                      Default value: null
  */
   $.fn.simpleColor = function(options) {
 
@@ -89,20 +92,21 @@
 
     // Option defaults
     options = $.extend({
-      defaultColor:   this.attr('defaultColor') || '#FFF',
-      border:       this.attr('border') || '1px solid #000',
-      cellWidth:    this.attr('cellWidth') || 10,
-      cellHeight:     this.attr('cellHeight') || 10,
-      cellMargin:     this.attr('cellMargin') || 1,
-      boxWidth:     this.attr('boxWidth') || '115px',
-      boxHeight:    this.attr('boxHeight') || '20px',
-      columns:      this.attr('columns') || 16,
-      insert:       this.attr('insert') || 'after',
-      buttonClass:    this.attr('buttonClass') || '',
-      colors:       this.attr('colors') || default_colors,
+      defaultColor:     this.attr('defaultColor') || '#FFF',
+      border:           this.attr('border') || '1px solid #000',
+      cellWidth:        this.attr('cellWidth') || 10,
+      cellHeight:       this.attr('cellHeight') || 10,
+      cellMargin:       this.attr('cellMargin') || 1,
+      boxWidth:         this.attr('boxWidth') || '115px',
+      boxHeight:        this.attr('boxHeight') || '20px',
+      columns:          this.attr('columns') || 16,
+      insert:           this.attr('insert') || 'after',
+      buttonClass:      this.attr('buttonClass') || '',
+      colors:           this.attr('colors') || default_colors,
       displayColorCode: this.attr('displayColorCode') || false,
       colorCodeAlign:   this.attr('colorCodeAlign') || 'center',
-      colorCodeColor:   this.attr('colorCodeColor') || '#FFF'
+      colorCodeColor:   this.attr('colorCodeColor') || '#FFF',
+      callback:         null
     }, options || {});
 
     // Hide the input
@@ -205,11 +209,16 @@
               event.data.display_box.css('backgroundColor', '#' + this.id);
               event.data.chooser.hide();
               event.data.display_box.show();
-     
+
               // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
               if (options.displayColorCode) {
                 event.data.display_box.text('#' + this.id);
               }
+              // If a callback function is defined then excecute it.
+              if (options.callback) {
+                options.callback(this.id);
+              }
+
             });
           }
         }
