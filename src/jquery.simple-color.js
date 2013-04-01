@@ -65,6 +65,9 @@
  *  onClose:            Callback function that executes whenever the chooser is closed
  *                      Default value: null
  *
+ *  livePreview:        The color display will change to show the color of the hovered color cell.
+ *                      The display will revert if no color is selected.
+ *                      Default value: false
  */
   $.fn.simpleColor = function(options) {
 
@@ -117,7 +120,8 @@
       colorCodeColor:   this.attr('colorCodeColor') || '#FFF',
       callback: null,
       onCellEnter: null,
-      onClose: null
+      onClose: null,
+      livePreview: false
     }, options || {});
 
     // Hide the input
@@ -144,7 +148,7 @@
       var container = $("<div class='simpleColorContainer' />");
       
       // Absolutely positioned child elements now 'work'.
-            container.css('position', 'relative');
+      container.css('position', 'relative');
 
       // Create the color display box
       var default_color = (this.value && this.value != '') ? this.value : options.defaultColor;
@@ -152,13 +156,13 @@
       var display_box = $("<div class='simpleColorDisplay' />");
       display_box.css({
         'backgroundColor': default_color,
-        'border':          options.border,
-                'width':           options.boxWidth,
-                'height':          options.boxHeight,
-                // Make sure that the code is vertically centered.
-                'line-height':     options.boxHeight,
-                'cursor':          'pointer'
-            });
+        'border': options.border,
+        'width':           options.boxWidth,
+        'height':          options.boxHeight,
+        // Make sure that the code is vertically centered.
+        'line-height':     options.boxHeight,
+        'cursor':          'pointer'
+      });
       container.append(display_box);
       
       // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
@@ -174,10 +178,20 @@
 
         // bind and namespace the click listener only when the chooser is displayed
         // unbind when the chooser is closed
-        $('html').bind("click.simpleColorDisplay", function() {
+        $('html').bind("click.simpleColorDisplay", function(e) {
+
           $('html').unbind("click.simpleColorDisplay");
           $('.simpleColorChooser').hide();
 
+          // if the user has not selected a new color, then revert the display
+          // makes sure the selected cell is within the current color selector
+          if (!$(e.target).hasClass("simpleColorCell")||!$.contains( $(event.target).closest(".simpleColorContainer")[0], $(e.target)[0] )) {
+            display_box.css('backgroundColor', default_color);
+            if (options.displayColorCode) {
+              display_box.text(default_color);
+            }
+          }
+          // execute onClose callback whenever the color chooser is closed
           if (options.onClose) {
             options.onClose();
           }
@@ -194,13 +208,13 @@
           var chooser = $("<div class='simpleColorChooser'/>");
           chooser.css({
             'border':   options.border,
-                  'margin':   '0 0 0 5px',
-                  'width':    options.totalWidth,
-                  'height':   options.totalHeight,
-                        'top':      0,
-                        'left':     options.boxWidth,
-                        'position': 'absolute'
-                    });
+            'margin':   '0 0 0 5px',
+            'width':    options.totalWidth,
+            'height':   options.totalHeight,
+            'top':      0,
+            'left':     options.boxWidth,
+            'position': 'absolute'
+          });
       
           event.data.container.chooser = chooser;
           event.data.container.append(chooser);
@@ -210,19 +224,27 @@
             var cell = $("<div class='simpleColorCell' id='" + options.colors[i] + "'/>");
             cell.css({
               'width':           options.cellWidth + 'px',
-                'height':          options.cellHeight + 'px',
-                    'margin':          options.cellMargin + 'px',
-                    'cursor':          'pointer',
-                    'lineHeight':      options.cellHeight + 'px',
-                    'fontSize':        '1px',
-                    'float':           'left',
-                    'backgroundColor': '#'+options.colors[i]
-                  });
+              'height':          options.cellHeight + 'px',
+              'margin':          options.cellMargin + 'px',
+              'cursor':          'pointer',
+              'lineHeight':      options.cellHeight + 'px',
+              'fontSize':        '1px',
+              'float':           'left',
+              'backgroundColor': '#'+options.colors[i]
+            });
             chooser.append(cell);
 
-            if (options.onCellEnter) {
+            if (options.onCellEnter||options.livePreview) {
               cell.bind('mouseenter', function(event) {
-                options.onCellEnter(this.id)
+                if (options.onCellEnter) {
+                  options.onCellEnter(this.id)
+                }
+                if (options.livePreview) {
+                  display_box.css('backgroundColor', '#' + this.id);
+                  if (options.displayColorCode) {
+                    display_box.text('#' + this.id);
+                  }
+                }
               });
             }
 

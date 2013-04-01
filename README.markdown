@@ -113,6 +113,10 @@ onCellEnter:        Callback function that excecutes when a cell is entered by t
 onClose:            Callback function that executes whenever the chooser is closed
                      Default value: null
 
+livePreview:        The color display will change to show the color of the hovered color cell.
+                    The display will revert if no color is selected.
+                     Default value: false
+
 ```
 
 Building From Scratch
