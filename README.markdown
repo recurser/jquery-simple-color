@@ -106,6 +106,13 @@ callback:           Function to be called when a color is selected. The
                     hex code is passed into the function.
                      default value: null
 
+onCellEnter:        Callback function that excecutes when the mouse enters a cell.
+                     default value: null
+                     returns: hex value
+
+onClose:            Callback function that executes when the chooser is closed.
+                     default value: null
+
 ```
 
 Building From Scratch

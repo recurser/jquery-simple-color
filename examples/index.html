@@ -15,20 +15,32 @@ $(document).ready(function(){
   $('.simple_color_custom_cell_size').simpleColor({ cellWidth: 30, cellHeight: 10 });
 
   $('.simple_color_callback').simpleColor({
-      callback: function( hex ) {
-        alert("You selected #" + hex);
-      }
+    callback: function( hex ) {
+      alert("You selected #" + hex);
+    }
+  });
+
+  $('.simple_color_mouse_enter').simpleColor({
+    onCellEnter: function( hex ) {
+      console.log("You just entered #" + hex);
+    }
   });
 
   $('.simple_color_kitchen_sink').simpleColor({
-      cellWidth: 20,
-      cellHeight: 20,
-      border: '1px solid #660033',
-      buttonClass: 'button',
-      displayColorCode: true,
-      callback: function( hex ) {
-        alert("You selected #" + hex);
-      }
+    cellWidth: 20,
+    cellHeight: 20,
+    border: '1px solid #660033',
+    buttonClass: 'button',
+    displayColorCode: true,
+    callback: function( hex ) {
+      alert("You selected #" + hex);
+    },
+    onCellEnter: function( hex ) {
+      console.log("You just entered #" + hex);
+    },
+    onClose: function() {
+      alert("color selector closed");
+    }
   });
 
 });
@@ -62,6 +74,9 @@ $(document).ready(function(){
 
   <h3>With Callback</h3>
   <input class='simple_color_callback' value='#cc3333'/>
+
+  <h3>With Mouse Entry Events (see javascript console)</h3>
+  <input class='simple_color_mouse_enter' value='#336600'/>
 
   <h3>Kitchen Sink</h3>
   <input class='simple_color_kitchen_sink' value='#993300'/>
