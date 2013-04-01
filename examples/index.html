@@ -8,6 +8,7 @@
 
 <script  type="text/javascript">
 $(document).ready(function(){
+
   $('.simple_color').simpleColor();
 
   $('.simple_color_color_code').simpleColor({ displayColorCode: true });
@@ -28,6 +29,12 @@ $(document).ready(function(){
       displayColorCode: true,
       callback: function( hex ) {
         alert("You selected #" + hex);
+      },
+      onCellEnter: function( hex ) {
+        console.log("You just entered #" + hex);
+      },
+      onClose: function() {
+        alert("color selector closed");
       }
   });
 
