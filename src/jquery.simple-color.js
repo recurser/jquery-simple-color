@@ -65,6 +65,9 @@
  *  onClose:            Callback function that executes when the chooser is closed.
  *                      Default value: null
  *
+ *  livePreview:        The color display will change to show the color of the hovered color cell.
+ *                      The display will revert if no color is selected.
+ *                      Default value: false
  */
   $.fn.simpleColor = function(options) {
 
@@ -117,7 +120,8 @@
       colorCodeColor:   this.attr('colorCodeColor') || '#FFF',
       callback:         null,
       onCellEnter:      null,
-      onClose:          null
+      onClose:          null,
+      livePreview:      false
     }, options || {});
 
     // Hide the input
@@ -174,10 +178,20 @@
 
         // Bind and namespace the click listener only when the chooser is 
         // displayed. Unbind when the chooser is closed.
-        $('html').bind("click.simpleColorDisplay", function() {
+        $('html').bind("click.simpleColorDisplay", function(e) {
           $('html').unbind("click.simpleColorDisplay");
           $('.simpleColorChooser').hide();
 
+          // If the user has not selected a new color, then revert the display.
+          // Makes sure the selected cell is within the current color selector.
+          var target = $(e.target);
+          if (target.is('.simpleColorCell') === false || $.contains( $(event.target).closest('.simpleColorContainer')[0], target[0]) === false) {
+            display_box.css('backgroundColor', default_color);
+            if (options.displayColorCode) {
+              display_box.text(default_color);
+            }
+          }
+          // Execute onClose callback whenever the color chooser is closed.
           if (options.onClose) {
             options.onClose();
           }
@@ -219,9 +233,17 @@
               'backgroundColor': '#'+options.colors[i]
             });
             chooser.append(cell);
-            if (options.onCellEnter) {
+            if (options.onCellEnter || options.livePreview) {
               cell.bind('mouseenter', function(event) {
-                options.onCellEnter(this.id);
+                if (options.onCellEnter) {
+                  options.onCellEnter(this.id);
+                }
+                if (options.livePreview) {
+                  display_box.css('backgroundColor', '#' + this.id);
+                  if (options.displayColorCode) {
+                    display_box.text('#' + this.id);
+                  }
+                }
               });
             }
             cell.bind('click', {

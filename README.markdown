@@ -113,6 +113,11 @@ onCellEnter:        Callback function that excecutes when the mouse enters a cel
 onClose:            Callback function that executes when the chooser is closed.
                      default value: null
 
+livePreview:        The color display will change to show the color currently
+                    under the mouse. The display will revert if no color is
+                    selected.
+                     default value: false
+
 ```
 
 Building From Scratch
