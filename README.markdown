@@ -106,6 +106,17 @@ callback:           Function to be called when a color is selected. The
                     hex code is passed into the function.
                      default value: null
 
+onCellEnter:        Callback function that excecutes when a cell is entered by the user's mouse
+                    Default value: null
+                     Returns: Hex Value
+
+onClose:            Callback function that executes whenever the chooser is closed
+                     Default value: null
+
+livePreview:        The color display will change to show the color of the hovered color cell.
+                    The display will revert if no color is selected.
+                     Default value: false
+
 ```
 
 Building From Scratch

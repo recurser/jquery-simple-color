@@ -8,11 +8,16 @@
 
 <script  type="text/javascript">
 $(document).ready(function(){
+
   $('.simple_color').simpleColor();
 
   $('.simple_color_color_code').simpleColor({ displayColorCode: true });
 
   $('.simple_color_custom_cell_size').simpleColor({ cellWidth: 30, cellHeight: 10 });
+
+  $('.simple_color_live_preview').simpleColor({
+      livePreview: true
+  });
 
   $('.simple_color_callback').simpleColor({
       callback: function( hex ) {
@@ -26,9 +31,16 @@ $(document).ready(function(){
       border: '1px solid #660033',
       buttonClass: 'button',
       displayColorCode: true,
+      livePreview: true,
       callback: function( hex ) {
         alert("You selected #" + hex);
-      }
+      },
+      onCellEnter: function( hex ) {
+        console.log("You just entered #" + hex);
+      },
+      onClose: function() {
+        alert("color selector closed");
+      },
   });
 
 });
@@ -59,6 +71,9 @@ $(document).ready(function(){
 
   <h3>Custom Cell Size</h3>
   <input class='simple_color_custom_cell_size' value='#cc9966'/>
+
+  <h3>With LivePreview</h3>
+  <input class='simple_color_live_preview' value='#ff00ff'/>
 
   <h3>With Callback</h3>
   <input class='simple_color_callback' value='#cc3333'/>
