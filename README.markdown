@@ -106,6 +106,18 @@ callback:           Function to be called when a color is selected. The
                     hex code is passed into the function.
                      default value: null
 
+onCellEnter:        Callback function that excecutes when the mouse enters a cell.
+                     default value: null
+                     returns: hex value
+
+onClose:            Callback function that executes when the chooser is closed.
+                     default value: null
+
+livePreview:        The color display will change to show the color currently
+                    under the mouse. The display will revert if no color is
+                    selected.
+                     default value: false
+
 ```
 
 Building From Scratch
@@ -158,6 +170,7 @@ Total time: 2 seconds
 Change history
 -----------
 
+* **Version 1.1.2 (2013-04-06)** : Add onCellEnter, onClose and livePreview options (thanks [jbergen](https://github.com/jbergen)).
 * **Version 1.1.1 (2013-03-29)** : Add callback option (thanks [jbergen](https://github.com/jbergen)).
 * **Version 1.1.0 (2012-10-14)** : Remove select and cancel buttons (thanks [wesnolte](https://github.com/wesnolte)).
 * **Version 1.0.1 (2011-08-15)** : Trigger change() event when a color is selected (thanks [firstclown](https://github.com/firstclown)), and make colored display box clickable to select colors.
