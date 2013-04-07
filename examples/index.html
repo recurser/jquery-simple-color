@@ -17,7 +17,7 @@ $(document).ready(function(){
   $('.simple_color_live_preview').simpleColor({ livePreview: true });
 
   $('.simple_color_callback').simpleColor({
-    callback: function( hex ) {
+    onSelect: function( hex ) {
       alert("You selected #" + hex);
     }
   });
@@ -35,7 +35,7 @@ $(document).ready(function(){
     buttonClass: 'button',
     displayColorCode: true,
     livePreview: true,
-    callback: function( hex ) {
+    onSelect: function( hex ) {
       alert("You selected #" + hex);
     },
     onCellEnter: function( hex ) {
@@ -57,6 +57,9 @@ $(document).ready(function(){
   .simpleColorDisplay {
     font-family: Helvetica;
     margin: 10px 0;
+  }
+  .simpleColorChooser {
+    background-color: #fff;
   }
 
   .button {

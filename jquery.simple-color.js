@@ -7,7 +7,7 @@
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Version: 1.1.2 (201304062015)
+ * Version: 1.1.3 (201304080141)
  */
  (function($) {
 /**
@@ -54,7 +54,7 @@
  *  colorCodeColor:     Text color of the color code inside the button. Only used if 'displayColorCode' is true.
  *                      Default value: '#FFF'
  *
- *  callback:           Callback function to call after a color has been chosen.
+ *  onSelect:           Callback function to call after a color has been chosen.
  *                      Default value: null
  *                      Returns:       hex value
  *
@@ -118,7 +118,7 @@
       displayColorCode: this.attr('displayColorCode') || false,
       colorCodeAlign:   this.attr('colorCodeAlign') || 'center',
       colorCodeColor:   this.attr('colorCodeColor') || '#FFF',
-      callback:         null,
+      onSelect:         null,
       onCellEnter:      null,
       onClose:          null,
       livePreview:      false
@@ -262,9 +262,9 @@
               if (options.displayColorCode) {
                 event.data.display_box.text('#' + this.id);
               }
-              // If a callback function is defined then excecute it.
-              if (options.callback) {
-                options.callback(this.id);
+              // If an onSelect callback function is defined then excecute it.
+              if (options.onSelect) {
+                options.onSelect(this.id);
               }
 
             });
