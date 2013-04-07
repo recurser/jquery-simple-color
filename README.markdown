@@ -102,7 +102,7 @@ colorCodeColor:     Text color of the color code inside the button. Only
                     used if 'displayColorCode' is true.
                      default value: '#FFF'
 
-callback:           Function to be called when a color is selected. The
+onSelect:           Function to be called when a color is selected. The
                     hex code is passed into the function.
                      default value: null
 
@@ -170,10 +170,11 @@ Total time: 2 seconds
 Change history
 -----------
 
-* **Version 1.1.2 (2013-04-06)** : Add onCellEnter, onClose and livePreview options (thanks [jbergen](https://github.com/jbergen)).
-* **Version 1.1.1 (2013-03-29)** : Add callback option (thanks [jbergen](https://github.com/jbergen)).
+* **Version 1.1.3 (2013-04-07)** : Rename *callback* option to *onSelect*.
+* **Version 1.1.2 (2013-04-06)** : Add *onCellEnter*, *onClose* and *livePreview* options (thanks [jbergen](https://github.com/jbergen)).
+* **Version 1.1.1 (2013-03-29)** : Add *callback* option (thanks [jbergen](https://github.com/jbergen)).
 * **Version 1.1.0 (2012-10-14)** : Remove select and cancel buttons (thanks [wesnolte](https://github.com/wesnolte)).
-* **Version 1.0.1 (2011-08-15)** : Trigger change() event when a color is selected (thanks [firstclown](https://github.com/firstclown)), and make colored display box clickable to select colors.
+* **Version 1.0.1 (2011-08-15)** : Trigger *change()* event when a color is selected (thanks [firstclown](https://github.com/firstclown)), and make colored display box clickable to select colors.
 * **Version 1.0.0 (2011-05-21)** : 1.0 release.
 
 
