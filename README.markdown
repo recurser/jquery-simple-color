@@ -170,6 +170,7 @@ Total time: 2 seconds
 Change history
 -----------
 
+* **Version 1.1.4 (2013-05-30)** : Add support for jQuery 1.9.1 (thanks [napcs](https://github.com/napcs)).
 * **Version 1.1.3 (2013-04-07)** : Rename *callback* option to *onSelect*.
 * **Version 1.1.2 (2013-04-06)** : Add *onCellEnter*, *onClose* and *livePreview* options (thanks [jbergen](https://github.com/jbergen)).
 * **Version 1.1.1 (2013-03-29)** : Add *callback* option (thanks [jbergen](https://github.com/jbergen)).
