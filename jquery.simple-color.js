@@ -7,7 +7,7 @@
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Version: 1.1.3 (201304080141)
+ * Version: 1.1.4 (201305301304)
  */
  (function($) {
 /**
@@ -129,10 +129,13 @@
 
     // Figure out the cell dimensions
     options.totalWidth = options.columns * (options.cellWidth + (2 * options.cellMargin));
-    if ($.browser.msie) {
+    
+    // this should probably do feature detection - I don't know why we need +2 for IE
+    // but this works for jQuery 1.9.1
+    if (navigator.userAgent.indexOf("MSIE")!=-1){
       options.totalWidth += 2;
     }
-
+    
     options.totalHeight = Math.ceil(options.colors.length / options.columns) * (options.cellHeight + (2 * options.cellMargin));
 
     // Store these options so they'll be available to the other functions
