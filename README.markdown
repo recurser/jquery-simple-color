@@ -4,9 +4,9 @@ About
 
 _jQuery Simple Color_ is a very simple color-picker plugin that displays a square grid of selectable colors. I found a lot of the other color-picker plugins quite heavy, so I ended up writing this to provide a dead-simple alternative. The list of colors it uses can be customized, and the layout size etc can be configured to a certain extent. _jQuery Simple Color_ is licensed under the [MIT license](http://www.opensource.org/licenses/mit-license.php).
 
-![Simple Color Closed](http://recursive-design.com/images/projects/jquery-simple-color/Simple_Color_Closed.png)
+![Simple Color Closed](http://www.daveperrett.com/images/projects/jquery-simple-color/Simple_Color_Closed.png)
 
-![Simple Color Open](http://recursive-design.com/images/projects/jquery-simple-color/Simple_Color_Open.png)
+![Simple Color Open](http://www.daveperrett.com/images/projects/jquery-simple-color/Simple_Color_Open.png)
 
 Installation
 ------------
@@ -200,7 +200,7 @@ Once you've made your commits:
 Author
 ------
 
-Dave Perrett :: mail@recursive-design.com :: [@recurser](http://twitter.com/recurser)
+Dave Perrett :: hello@daveperrett.com :: [@daveperrett](http://twitter.com/daveperrett)
 
 
 Copyright
