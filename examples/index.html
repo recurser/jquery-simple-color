@@ -8,6 +8,11 @@
 
 <script  type="text/javascript">
 $(document).ready(function(){
+
+  $('.close_button').click(function(event) {
+    $('input').closeChooser();
+  });
+
   $('.simple_color').simpleColor();
 
   $('.simple_color_color_code').simpleColor({ displayColorCode: true });
@@ -37,7 +42,6 @@ $(document).ready(function(){
     cellHeight: 20,
     chooserCSS: { 'border': '1px solid #660033' },
     displayCSS: { 'border': '1px solid red' },
-    buttonClass: 'button',
     displayColorCode: true,
     livePreview: true,
     onSelect: function(hex, element) {
@@ -47,30 +51,17 @@ $(document).ready(function(){
       console.log("You just entered #" + hex + " for input #" + element.attr('class'));
     },
     onClose: function(element) {
-      alert("color selector closed for input #" + element.attr('class'));
+      alert("color chooser closed for input #" + element.attr('class'));
     }
   });
 
 });
 </script>
-<style type="text/css">
-  input#alert_button {
-    display: block;
-    margin-top: 20px;
-  }
-
-  .simpleColorDisplay {
-    font-family: Helvetica;
-    margin: 10px 0;
-  }
-
-  .button {
-    clear: right;
-  }
-</style>
 </head>
 
 <body>
+  <button class='close_button'>Close all color choosers</button>
+
   <h3>Basic</h3>
   <input class='simple_color' value='#cc3333'/>
 

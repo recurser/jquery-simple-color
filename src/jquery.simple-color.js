@@ -11,7 +11,7 @@
  */
  (function($) {
 /**
- * simpleColor() provides a mechanism for displaying simple color-pickers.
+ * simpleColor() provides a mechanism for displaying simple color-choosers.
  *
  * If an options Object is provided, the following attributes are supported:
  *
@@ -45,39 +45,41 @@
  *  displayColorCode:   Display the color code (eg #333333) as text inside the button. true or false.
  *                      Default value: false
  *
- *  colorCodeAlign:     Text alignment used to display the color code inside the button. Only used if 'displayColorCode' is true. 'left', 'center' or 'right'
+ *  colorCodeAlign:     Text alignment used to display the color code inside the button. Only used if
+ *                      'displayColorCode' is true. 'left', 'center' or 'right'
  *                      Default value: 'center'
  *
- *  colorCodeColor:     Text color of the color code inside the button. Only used if 'displayColorCode' is true.
+ *  colorCodeColor:     Text color of the color code inside the button. Only used if 'displayColorCode'
+ *                      is true.
  *                      Default value: '#FFF'
  *
- *  onSelect:           Callback function to call after a color has been chosen.
- *                      The callback function will be passed two arguments - the
- *                      hex code of the selected color, and the input element
- *                      that triggered the chooser.
+ *  onSelect:           Callback function to call after a color has been chosen. The callback
+ *                      function will be passed two arguments - the hex code of the selected color,
+ *                      and the input element that triggered the chooser.
  *                      Default value: null
  *                      Returns:       hex value
  *
- *  onCellEnter:        Callback function that excecutes when the mouse enters a
- *                      cell. The callback function will be passed two arguments
- *                      - the hex code of the current color, and the input
- *                      element that triggered the chooser.
+ *  onCellEnter:        Callback function that excecutes when the mouse enters a cell. The callback
+ *                      function will be passed two arguments - the hex code of the current color,
+ *                      and the input element that triggered the chooser.
  *                      Default value: null
  *                      Returns:       hex value
  *
- *  onClose:            Callback function that executes when the chooser is
- *                      closed. The callback function will be passed one
- *                      argument - the input element that triggered the chooser.
+ *  onClose:            Callback function that executes when the chooser is closed. The callback
+ *                      function will be passed one argument - the input element that triggered
+ *                      the chooser.
  *                      Default value: null
  *
  *  livePreview:        The color display will change to show the color of the hovered color cell.
  *                      The display will revert if no color is selected.
  *                      Default value: false
  *
- *  chooserCSS:         An associative array of CSS properties that will be applied to the pop-up color chooser
+ *  chooserCSS:         An associative array of CSS properties that will be applied to the pop-up
+ *                      color chooser.
  *                      Default value: see options.chooserCSS in the source
  *
- *  displayCSS:         An associative array of CSS properties that will be applied to the color display box
+ *  displayCSS:         An associative array of CSS properties that will be applied to the color
+ *                      display box.
  *                      Default value: see options.displayCSS in the source
  */
   $.fn.simpleColor = function(options) {
@@ -125,7 +127,6 @@
       boxHeight:        this.attr('boxHeight') || '20px',
       columns:          this.attr('columns') || 16,
       insert:           this.attr('insert') || 'after',
-      buttonClass:      this.attr('buttonClass') || '',
       colors:           this.attr('colors') || default_colors,
       displayColorCode: this.attr('displayColorCode') || false,
       colorCodeAlign:   this.attr('colorCodeAlign') || 'center',
@@ -178,7 +179,7 @@
     // each() function but i'm not sure how
     $.simpleColorOptions = options;
 
-    function buildSelector(index) {
+    function buildChooser(index) {
       options = $.simpleColorOptions;
 
       // Create a container to hold everything
@@ -212,7 +213,7 @@
           $('.simpleColorChooser').hide();
 
           // If the user has not selected a new color, then revert the display.
-          // Makes sure the selected cell is within the current color selector.
+          // Makes sure the selected cell is within the current color chooser.
           var target = $(e.target);
           if (target.is('.simpleColorCell') === false || $.contains( $(event.target).closest('.simpleColorContainer')[0], target[0]) === false) {
             display_box.css('backgroundColor', default_color);
@@ -306,7 +307,7 @@
 
     };
 
-    this.each(buildSelector);
+    this.each(buildChooser);
 
     $('.simpleColorDisplay').each(function() {
       $(this).click(function(e){
@@ -318,9 +319,9 @@
   };
 
   /*
-   * Close the given color selectors
+   * Close the given color choosers.
    */
-  $.fn.closeSelector = function() {
+  $.fn.closeChooser = function() {
     this.each( function(index) {
       var container = $(this).parent().find('div.simpleColorContainer');
       container.find('.simpleColorChooser').hide();

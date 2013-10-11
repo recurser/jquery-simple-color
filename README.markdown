@@ -4,8 +4,6 @@ About
 
 _jQuery Simple Color_ is a very simple color-picker plugin that displays a square grid of selectable colors. I found a lot of the other color-picker plugins quite heavy, so I ended up writing this to provide a dead-simple alternative. The list of colors it uses can be customized, and the layout size etc can be configured to a certain extent. _jQuery Simple Color_ is licensed under the [MIT license](http://www.opensource.org/licenses/mit-license.php).
 
-![Simple Color Closed](http://www.daveperrett.com/images/projects/jquery-simple-color/Simple_Color_Closed.png)
-
 ![Simple Color Open](http://www.daveperrett.com/images/projects/jquery-simple-color/Simple_Color_Open.png)
 
 Installation
@@ -42,12 +40,16 @@ _Simple Color_ also supports various options to customize the color picker:
 $('.simple_color').simpleColor({
     cellWidth: 9,
     cellHeight: 9,
-    border: '1px solid #333333',
-    buttonClass: 'button',
-    callback: function(hex) {
-        alert("color picked! " + hex)
+    callback: function(hex, element) {
+        alert("color picked! " + hex + " for input #" + element.attr('class'));
     }
 });
+```
+
+If you wish to programatically close a color chooser, use the closeChooser() function:
+
+```javascript
+$('.simple_color').closeChooser();
 ```
 
 Options
@@ -75,62 +77,51 @@ boxWidth:           Width of the color display box.
 boxHeight:          Height of the color display box.
                      default value: 20px
 
-columns:            Number of columns to display. Color order may look
-                    strange if this is altered.
+columns:            Number of columns to display. Color order may look strange if this is altered.
                      default value: 16
 
-insert:             The position to insert the color picker. 'before' or
-                    'after'.
+insert:             The position to insert the color picker. 'before' or 'after'.
                      default value: 'after'
 
-buttonClass:        A custom CSS class to add to the button, if you want to
-                    add some custom styling.
-                     default value: ''
-
-colors:             An array of colors to display, if you want to
-                    customize the default color set.
+colors:             An array of colors to display, if you want to customize the default color set.
                      default value: default color set - see 'default_colors' below.
 
-displayColorCode:   Display the color code (eg #333333) as text inside
-                    the button. true or false.
+displayColorCode:   Display the color code (eg #333333) as text inside the button. true or false.
                      default value: false
 
-colorCodeAlign:     Text alignment used to display the color code inside
-                    the button. Only used if 'displayColorCode' is true.
-                    'left', 'center' or 'right'
+colorCodeAlign:     Text alignment used to display the color code inside the button. Only used if
+                    'displayColorCode' is true. Possible values are 'left', 'center' or 'right',
                      default value: 'center'
 
-colorCodeColor:     Text color of the color code inside the button. Only
-                    used if 'displayColorCode' is true.
+colorCodeColor:     Text color of the color code inside the button. Only used if 'displayColorCode'
+                    is true.
                      default value: '#FFF'
 
-onSelect:           Function to be called when a color is selected. The hex code
-                    is passed into the function. The callback function will be
-                    passed two arguments - the hex code of the selected color,
-                    and the input element that triggered the chooser.
+onSelect:           Function to be called when a color is selected. The hex code is passed into the
+                    function. The callback function will be passed two arguments - the hex code of
+                    the selected color, and the input element that triggered the chooser.
                      default value: null
 
-onCellEnter:        Callback function that excecutes when the mouse enters a
-                    cell. The callback function will be passed two arguments
-                    - the hex code of the current color, and the input element
-                    that triggered the chooser.
+onCellEnter:        Callback function that excecutes when the mouse enters a cell. The callback
+                    function will be passed two arguments - the hex code of the current color, and
+                    the input element that triggered the chooser.
                      default value: null
                      returns: hex value
 
-onClose:            Callback function that executes when the chooser is closed.
-                    The callback function will be passed one argument - the
-                    input element that triggered the chooser.
+onClose:            Callback function that executes when the chooser is closed. The callback
+                    function will be passed one argument - the input element that triggered the chooser.
                      default value: null
 
-livePreview:        The color display will change to show the color currently
-                    under the mouse. The display will revert if no color is
-                    selected.
+livePreview:        The color display will change to show the color currently under the mouse. The
+                    display will revert if no color is selected.
                      default value: false
 
-chooserCSS:         An associative array of CSS properties that will be applied to the pop-up color picker
+chooserCSS:         An associative array of CSS properties that will be applied to the pop-up color
+                    picker.
                     Default value: see options.chooserCSS in the source
 
-displayCSS:         An associative array of CSS properties that will be applied to the color display box
+displayCSS:         An associative array of CSS properties that will be applied to the color display
+                    box.
                     Default value: see options.chooserCSS in the source
 
 ```
@@ -185,7 +176,7 @@ Total time: 2 seconds
 Change history
 -----------
 
-* **Version 1.1.5 (2013-10-11)** :
+* **Version 1.1.5 (2013-10-12)** :
   * Add bower support.
   * Add displayCSS and chooserCSS options, and remove the border option.
   * Pass the original input element as an argument to callback functions.
