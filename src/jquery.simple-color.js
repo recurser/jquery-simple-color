@@ -40,7 +40,7 @@
  *                      Default value: 'after'
  *
  *  colors:             An array of colors to display, if you want to customize the default color set.
- *                      Default value: default color set - see 'default_colors' below.
+ *                      Default value: default color set - see 'defaultColors' below.
  *
  *  displayColorCode:   Display the color code (eg #333333) as text inside the button. true or false.
  *                      Default value: false
@@ -86,7 +86,7 @@
 
     var element = this;
 
-    var default_colors = [
+    var defaultColors = [
       '990033', 'ff3366', 'cc0033', 'ff0033', 'ff9999', 'cc3366', 'ffccff', 'cc6699',
       '993366', '660033', 'cc3399', 'ff99cc', 'ff66cc', 'ff99ff', 'ff6699', 'cc0066',
       'ff0066', 'ff3399', 'ff0099', 'ff33cc', 'ff00cc', 'ff66ff', 'ff33ff', 'ff00ff',
@@ -127,7 +127,7 @@
       boxHeight:        this.attr('boxHeight') || '20px',
       columns:          this.attr('columns') || 16,
       insert:           this.attr('insert') || 'after',
-      colors:           this.attr('colors') || default_colors,
+      colors:           this.attr('colors') || defaultColors,
       displayColorCode: this.attr('displayColorCode') || false,
       colorCodeAlign:   this.attr('colorCodeAlign') || 'center',
       colorCodeColor:   this.attr('colorCodeColor') || '#FFF',
@@ -189,23 +189,22 @@
 			container.css('position', 'relative');
 
       // Create the color display box
-      var default_color = (this.value && this.value != '') ? this.value : options.defaultColor;
+      var defaultColor = (this.value && this.value != '') ? this.value : options.defaultColor;
 
-      var display_box = $("<div class='simpleColorDisplay' />");
-      display_box.css($.extend(options.displayCSS, { 'background-color': default_color }));
-      container.append(display_box);
+      var displayBox = $("<div class='simpleColorDisplay' />");
+      displayBox.css($.extend(options.displayCSS, { 'background-color': defaultColor }));
+      container.append(displayBox);
 
       // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
       if (options.displayColorCode) {
-        display_box.text(this.value);
-        display_box.css({
+        displayBox.text(this.value);
+        displayBox.css({
           'color':     options.colorCodeColor,
           'textAlign': options.colorCodeAlign
         });
       }
 
-      var select_callback = function (event) {
-
+      var selectCallback = function (event) {
         // Bind and namespace the click listener only when the chooser is
         // displayed. Unbind when the chooser is closed.
         $('html').bind("click.simpleColorDisplay", function(e) {
@@ -216,9 +215,9 @@
           // Makes sure the selected cell is within the current color chooser.
           var target = $(e.target);
           if (target.is('.simpleColorCell') === false || $.contains( $(event.target).closest('.simpleColorContainer')[0], target[0]) === false) {
-            display_box.css('backgroundColor', default_color);
+            displayBox.css('backgroundColor', defaultColor);
             if (options.displayColorCode) {
-              display_box.text(default_color);
+              displayBox.text(defaultColor);
             }
           }
           // Execute onClose callback whenever the color chooser is closed.
@@ -233,7 +232,6 @@
 
         // Build the chooser.
         } else {
-
           // Make a chooser div to hold the cells
           var chooser = $("<div class='simpleColorChooser'/>");
           chooser.css(options.chooserCSS);
@@ -261,9 +259,9 @@
                   options.onCellEnter(this.id, element);
                 }
                 if (options.livePreview) {
-                  display_box.css('backgroundColor', '#' + this.id);
+                  displayBox.css('backgroundColor', '#' + this.id);
                   if (options.displayColorCode) {
-                    display_box.text('#' + this.id);
+                    displayBox.text('#' + this.id);
                   }
                 }
               });
@@ -271,40 +269,38 @@
             cell.bind('click', {
               input: event.data.input,
               chooser: chooser,
-              display_box: display_box
+              displayBox: displayBox
             },
             function(event) {
               event.data.input.value = '#' + this.id;
               $(event.data.input).change();
-              event.data.display_box.css('backgroundColor', '#' + this.id);
+              event.data.displayBox.css('backgroundColor', '#' + this.id);
               event.data.chooser.hide();
-              event.data.display_box.show();
+              event.data.displayBox.show();
 
               // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
               if (options.displayColorCode) {
-                event.data.display_box.text('#' + this.id);
+                event.data.displayBox.text('#' + this.id);
               }
+
               // If an onSelect callback function is defined then excecute it.
               if (options.onSelect) {
                 options.onSelect(this.id, element);
               }
-
             });
           }
         }
       };
 
-      var callback_params = {
-        container: container,
-        input: this,
-        display_box: display_box
-      };
-
       // Also bind the display box button to display the chooser.
-      display_box.bind('click', callback_params, select_callback);
+      var callbackParams = {
+        input:      this,
+        container:  container,
+        displayBox: displayBox
+      };
+      displayBox.bind('click', callbackParams, selectCallback);
 
       $(this).after(container);
-
     };
 
     this.each(buildChooser);
