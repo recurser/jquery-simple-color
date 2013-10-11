@@ -18,9 +18,6 @@
  *  defaultColor:       Default (initially selected) color.
  *                      Default value: '#FFF'
  *
- *  border:             CSS border properties.
- *                      Default value: '1px solid #000'
- *
  *  cellWidth:          Width of each individual color cell.
  *                      Default value: 10
  *
@@ -39,7 +36,7 @@
  *  columns:            Number of columns to display. Color order may look strange if this is altered.
  *                      Default value: 16
  *
- *  insert:             The position to insert the color picker. 'before' or 'after'.
+ *  insert:             The position to insert the color chooser. 'before' or 'after'.
  *                      Default value: 'after'
  *
  *  colors:             An array of colors to display, if you want to customize the default color set.
@@ -68,6 +65,12 @@
  *  livePreview:        The color display will change to show the color of the hovered color cell.
  *                      The display will revert if no color is selected.
  *                      Default value: false
+ *
+ *  chooserCSS:         An associative array of CSS properties that will be applied to the pop-up color chooser
+ *                      Default value: see options.chooserCSS in the source
+ *
+ *  displayCSS:         An associative array of CSS properties that will be applied to the color display box
+ *                      Default value: see options.displayCSS in the source
  */
   $.fn.simpleColor = function(options) {
 
@@ -105,7 +108,6 @@
     // Option defaults
     options = $.extend({
       defaultColor:     this.attr('defaultColor') || '#FFF',
-      border:           this.attr('border') || '1px solid #000',
       cellWidth:        this.attr('cellWidth') || 10,
       cellHeight:       this.attr('cellHeight') || 10,
       cellMargin:       this.attr('cellMargin') || 1,
@@ -124,11 +126,33 @@
       livePreview:      false
     }, options || {});
 
-    // Hide the input
-    this.hide();
-
     // Figure out the cell dimensions
     options.totalWidth = options.columns * (options.cellWidth + (2 * options.cellMargin));
+
+    // Custom CSS for the chooser, which relies on previously defined options.
+    options.chooserCSS = $.extend({
+      'border':           '1px solid #000',
+      'margin':           '0 0 0 5px',
+      'width':            options.totalWidth,
+      'height':           options.totalHeight,
+      'top':              0,
+      'left':             options.boxWidth,
+      'position':         'absolute',
+      'background-color': '#fff'
+    }, options.chooserCSS || {});
+
+    // Custom CSS for the display box, which relies on previously defined options.
+    options.displayCSS = $.extend({
+      'background-color': options.defaultColor,
+      'border':           '1px solid #000',
+      'width':            options.boxWidth,
+      'height':           options.boxHeight,
+      'line-height':      options.boxHeight,
+      'cursor':           'pointer'
+    }, options.displayCSS || {});
+
+    // Hide the input
+    this.hide();
 
     // this should probably do feature detection - I don't know why we need +2 for IE
     // but this works for jQuery 1.9.1
@@ -157,15 +181,7 @@
       var default_color = (this.value && this.value != '') ? this.value : options.defaultColor;
 
       var display_box = $("<div class='simpleColorDisplay' />");
-      display_box.css({
-        'backgroundColor': default_color,
-        'border':          options.border,
-        'width':           options.boxWidth,
-        'height':          options.boxHeight,
-        // Make sure that the code is vertically centered.
-        'line-height':     options.boxHeight,
-        'cursor':          'pointer'
-      });
+      display_box.css($.extend(options.displayCSS, { 'background-color': default_color }));
       container.append(display_box);
 
       // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
@@ -209,15 +225,7 @@
 
           // Make a chooser div to hold the cells
           var chooser = $("<div class='simpleColorChooser'/>");
-          chooser.css({
-            'border':   options.border,
-            'margin':   '0 0 0 5px',
-            'width':    options.totalWidth,
-            'height':   options.totalHeight,
-            'top':      0,
-            'left':     options.boxWidth,
-            'position': 'absolute'
-          });
+          chooser.css(options.chooserCSS);
 
           event.data.container.chooser = chooser;
           event.data.container.append(chooser);

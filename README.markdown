@@ -120,6 +120,12 @@ livePreview:        The color display will change to show the color currently
                     selected.
                      default value: false
 
+chooserCSS:         An associative array of CSS properties that will be applied to the pop-up color picker
+                    Default value: see options.chooserCSS in the source
+
+displayCSS:         An associative array of CSS properties that will be applied to the color display box
+                    Default value: see options.chooserCSS in the source
+
 ```
 
 Building From Scratch
@@ -172,7 +178,9 @@ Total time: 2 seconds
 Change history
 -----------
 
-* **Version 1.1.5 (2013-10-11)** : Add bower support.
+* **Version 1.1.5 (2013-10-11)** :
+  * Add bower support.
+  * Add displayCSS and chooserCSS options, and remove the border option.
 * **Version 1.1.4 (2013-05-30)** : Add support for jQuery 1.9.1 (thanks [napcs](https://github.com/napcs)).
 * **Version 1.1.3 (2013-04-07)** : Rename *callback* option to *onSelect*.
 * **Version 1.1.2 (2013-04-06)** : Add *onCellEnter*, *onClose* and *livePreview* options (thanks [jbergen](https://github.com/jbergen)).
