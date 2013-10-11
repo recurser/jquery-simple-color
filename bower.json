@@ -1,0 +1,24 @@
+{
+  "name": "jquery-simple-color",
+  "version": "1.1.5",
+  "homepage": "https://github.com/recurser/jquery-simple-color",
+  "authors": [
+    "Dave Perrett <hello@daveperrett.com>"
+  ],
+  "description": "A dead-simple jQuery color picker.",
+  "main": "jquery.simple-color.js",
+  "keywords": [
+    "jquery",
+    "color",
+    "picker",
+    "chooser"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

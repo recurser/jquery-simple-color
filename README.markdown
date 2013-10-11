@@ -13,6 +13,8 @@ Installation
 
 You'll need to download the [jQuery library](http://docs.jquery.com/Downloading_jQuery#Current_Release), and include it before _jquery.simple-color.js_ in your HTML source. See the _examples_ folder for examples.
 
+_jquery-simple-color_ is also available as a [bower](http://bower.io/) component.
+
 Usage
 -----
 
@@ -170,6 +172,7 @@ Total time: 2 seconds
 Change history
 -----------
 
+* **Version 1.1.5 (2013-10-11)** : Add bower support.
 * **Version 1.1.4 (2013-05-30)** : Add support for jQuery 1.9.1 (thanks [napcs](https://github.com/napcs)).
 * **Version 1.1.3 (2013-04-07)** : Rename *callback* option to *onSelect*.
 * **Version 1.1.2 (2013-04-06)** : Add *onCellEnter*, *onClose* and *livePreview* options (thanks [jbergen](https://github.com/jbergen)).
