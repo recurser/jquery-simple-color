@@ -8,72 +8,71 @@
 
 <script  type="text/javascript">
 $(document).ready(function(){
+
+  $('.close_button').click(function(event) {
+    $('input').closeChooser();
+  });
+
   $('.simple_color').simpleColor();
 
   $('.simple_color_color_code').simpleColor({ displayColorCode: true });
+
+  $('.simple_color_custom_chooser_css').simpleColor({ chooserCSS: { 'background-color': 'black', 'opacity': '0.8' } });
+
+  $('.simple_color_custom_display_css').simpleColor({ displayCSS: { 'border': '1px solid red' } });
 
   $('.simple_color_custom_cell_size').simpleColor({ cellWidth: 30, cellHeight: 10 });
 
   $('.simple_color_live_preview').simpleColor({ livePreview: true });
 
   $('.simple_color_callback').simpleColor({
-    onSelect: function( hex ) {
-      alert("You selected #" + hex);
+    onSelect: function(hex, element) {
+      alert("You selected #" + hex + " for input #" + element.attr('class'));
     }
   });
 
   $('.simple_color_mouse_enter').simpleColor({
-    onCellEnter: function( hex ) {
-      console.log("You just entered #" + hex);
+    onCellEnter: function(hex, element) {
+      console.log("You just entered #" + hex + " for input #" + element.attr('class'));
     }
   });
 
   $('.simple_color_kitchen_sink').simpleColor({
     cellWidth: 20,
     cellHeight: 20,
-    border: '1px solid #660033',
-    buttonClass: 'button',
+    chooserCSS: { 'border': '1px solid #660033' },
+    displayCSS: { 'border': '1px solid red' },
     displayColorCode: true,
     livePreview: true,
-    onSelect: function( hex ) {
-      alert("You selected #" + hex);
+    onSelect: function(hex, element) {
+      alert("You selected #" + hex + " for input #" + element.attr('class'));
     },
-    onCellEnter: function( hex ) {
-      console.log("You just entered #" + hex);
+    onCellEnter: function(hex, element) {
+      console.log("You just entered #" + hex + " for input #" + element.attr('class'));
     },
-    onClose: function() {
-      alert("color selector closed");
+    onClose: function(element) {
+      alert("color chooser closed for input #" + element.attr('class'));
     }
   });
 
 });
 </script>
-<style type="text/css">
-  input#alert_button {
-    display: block;
-    margin-top: 20px;
-  }
-
-  .simpleColorDisplay {
-    font-family: Helvetica;
-    margin: 10px 0;
-  }
-  .simpleColorChooser {
-    background-color: #fff;
-  }
-
-  .button {
-    clear: right;
-  }
-</style>
 </head>
 
 <body>
+  <button class='close_button'>Close all color choosers</button>
+
   <h3>Basic</h3>
   <input class='simple_color' value='#cc3333'/>
 
   <h3>Display Color Code</h3>
   <input class='simple_color_color_code' value='#33cc33'/>
+
+  <h3>Custom Color Chooser CSS</h3>
+  <input class='simple_color_custom_chooser_css' value='#ff6633'/>
+
+  <h3>Custom Color Display CSS</h3>
+  <input class='simple_color_custom_display_css' value='#ccffff'/>
 
   <h3>Custom Cell Size</h3>
   <input class='simple_color_custom_cell_size' value='#cc9966'/>
