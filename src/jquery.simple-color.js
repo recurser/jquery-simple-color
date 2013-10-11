@@ -129,18 +129,18 @@
 
     // Figure out the cell dimensions
     options.totalWidth = options.columns * (options.cellWidth + (2 * options.cellMargin));
-    
+
     // this should probably do feature detection - I don't know why we need +2 for IE
     // but this works for jQuery 1.9.1
     if (navigator.userAgent.indexOf("MSIE")!=-1){
       options.totalWidth += 2;
     }
-    
+
     options.totalHeight = Math.ceil(options.colors.length / options.columns) * (options.cellHeight + (2 * options.cellMargin));
 
     // Store these options so they'll be available to the other functions
     // TODO - must be a better way to do this, not sure what the 'official'
-    // jQuery method is. Ideally i want to pass these as a parameter to the 
+    // jQuery method is. Ideally i want to pass these as a parameter to the
     // each() function but i'm not sure how
     $.simpleColorOptions = options;
 
@@ -149,7 +149,7 @@
 
       // Create a container to hold everything
       var container = $("<div class='simpleColorContainer' />");
-      
+
       // Absolutely positioned child elements now 'work'.
 			container.css('position', 'relative');
 
@@ -167,7 +167,7 @@
         'cursor':          'pointer'
       });
       container.append(display_box);
-      
+
       // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
       if (options.displayColorCode) {
         display_box.text(this.value);
@@ -176,10 +176,10 @@
           'textAlign': options.colorCodeAlign
         });
       }
-      
+
       var select_callback = function (event) {
 
-        // Bind and namespace the click listener only when the chooser is 
+        // Bind and namespace the click listener only when the chooser is
         // displayed. Unbind when the chooser is closed.
         $('html').bind("click.simpleColorDisplay", function(e) {
           $('html').unbind("click.simpleColorDisplay");
@@ -203,7 +203,7 @@
         // Use an existing chooser if there is one
         if (event.data.container.chooser) {
           event.data.container.chooser.toggle();
-      
+
         // Build the chooser.
         } else {
 
@@ -218,10 +218,10 @@
             'left':     options.boxWidth,
             'position': 'absolute'
           });
-      
+
           event.data.container.chooser = chooser;
           event.data.container.append(chooser);
-      
+
           // Create the cells
           for (var i=0; i<options.colors.length; i++) {
             var cell = $("<div class='simpleColorCell' id='" + options.colors[i] + "'/>");
@@ -250,10 +250,10 @@
               });
             }
             cell.bind('click', {
-              input: event.data.input, 
-              chooser: chooser, 
+              input: event.data.input,
+              chooser: chooser,
               display_box: display_box
-            }, 
+            },
             function(event) {
               event.data.input.value = '#' + this.id;
               $(event.data.input).change();
@@ -274,10 +274,10 @@
           }
         }
       };
-      
+
       var callback_params = {
-        container: container, 
-        input: this, 
+        container: container,
+        input: this,
         display_box: display_box
       };
 
