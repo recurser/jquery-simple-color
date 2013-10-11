@@ -21,14 +21,14 @@ $(document).ready(function(){
   $('.simple_color_live_preview').simpleColor({ livePreview: true });
 
   $('.simple_color_callback').simpleColor({
-    onSelect: function( hex ) {
-      alert("You selected #" + hex);
+    onSelect: function(hex, element) {
+      alert("You selected #" + hex + " for input #" + element.attr('class'));
     }
   });
 
   $('.simple_color_mouse_enter').simpleColor({
-    onCellEnter: function( hex ) {
-      console.log("You just entered #" + hex);
+    onCellEnter: function(hex, element) {
+      console.log("You just entered #" + hex + " for input #" + element.attr('class'));
     }
   });
 
@@ -40,14 +40,14 @@ $(document).ready(function(){
     buttonClass: 'button',
     displayColorCode: true,
     livePreview: true,
-    onSelect: function( hex ) {
-      alert("You selected #" + hex);
+    onSelect: function(hex, element) {
+      alert("You selected #" + hex + " for input #" + element.attr('class'));
     },
-    onCellEnter: function( hex ) {
-      console.log("You just entered #" + hex);
+    onCellEnter: function(hex, element) {
+      console.log("You just entered #" + hex + " for input #" + element.attr('class'));
     },
-    onClose: function() {
-      alert("color selector closed");
+    onClose: function(element) {
+      alert("color selector closed for input #" + element.attr('class'));
     }
   });
 

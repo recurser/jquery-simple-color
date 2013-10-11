@@ -52,14 +52,22 @@
  *                      Default value: '#FFF'
  *
  *  onSelect:           Callback function to call after a color has been chosen.
+ *                      The callback function will be passed two arguments - the
+ *                      hex code of the selected color, and the input element
+ *                      that triggered the chooser.
  *                      Default value: null
  *                      Returns:       hex value
  *
- *  onCellEnter:        Callback function that excecutes when the mouse enters a cell.
+ *  onCellEnter:        Callback function that excecutes when the mouse enters a
+ *                      cell. The callback function will be passed two arguments
+ *                      - the hex code of the current color, and the input
+ *                      element that triggered the chooser.
  *                      Default value: null
  *                      Returns:       hex value
  *
- *  onClose:            Callback function that executes when the chooser is closed.
+ *  onClose:            Callback function that executes when the chooser is
+ *                      closed. The callback function will be passed one
+ *                      argument - the input element that triggered the chooser.
  *                      Default value: null
  *
  *  livePreview:        The color display will change to show the color of the hovered color cell.
@@ -73,6 +81,8 @@
  *                      Default value: see options.displayCSS in the source
  */
   $.fn.simpleColor = function(options) {
+
+    var element = this;
 
     var default_colors = [
       '990033', 'ff3366', 'cc0033', 'ff0033', 'ff9999', 'cc3366', 'ffccff', 'cc6699',
@@ -212,7 +222,7 @@
           }
           // Execute onClose callback whenever the color chooser is closed.
           if (options.onClose) {
-            options.onClose();
+            options.onClose(element);
           }
         });
 
@@ -247,7 +257,7 @@
             if (options.onCellEnter || options.livePreview) {
               cell.bind('mouseenter', function(event) {
                 if (options.onCellEnter) {
-                  options.onCellEnter(this.id);
+                  options.onCellEnter(this.id, element);
                 }
                 if (options.livePreview) {
                   display_box.css('backgroundColor', '#' + this.id);
@@ -275,7 +285,7 @@
               }
               // If an onSelect callback function is defined then excecute it.
               if (options.onSelect) {
-                options.onSelect(this.id);
+                options.onSelect(this.id, element);
               }
 
             });

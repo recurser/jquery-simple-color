@@ -104,15 +104,22 @@ colorCodeColor:     Text color of the color code inside the button. Only
                     used if 'displayColorCode' is true.
                      default value: '#FFF'
 
-onSelect:           Function to be called when a color is selected. The
-                    hex code is passed into the function.
+onSelect:           Function to be called when a color is selected. The hex code
+                    is passed into the function. The callback function will be
+                    passed two arguments - the hex code of the selected color,
+                    and the input element that triggered the chooser.
                      default value: null
 
-onCellEnter:        Callback function that excecutes when the mouse enters a cell.
+onCellEnter:        Callback function that excecutes when the mouse enters a
+                    cell. The callback function will be passed two arguments
+                    - the hex code of the current color, and the input element
+                    that triggered the chooser.
                      default value: null
                      returns: hex value
 
 onClose:            Callback function that executes when the chooser is closed.
+                    The callback function will be passed one argument - the
+                    input element that triggered the chooser.
                      default value: null
 
 livePreview:        The color display will change to show the color currently
@@ -181,6 +188,7 @@ Change history
 * **Version 1.1.5 (2013-10-11)** :
   * Add bower support.
   * Add displayCSS and chooserCSS options, and remove the border option.
+  * Pass the original input element as an argument to callback functions.
 * **Version 1.1.4 (2013-05-30)** : Add support for jQuery 1.9.1 (thanks [napcs](https://github.com/napcs)).
 * **Version 1.1.3 (2013-04-07)** : Rename *callback* option to *onSelect*.
 * **Version 1.1.2 (2013-04-06)** : Add *onCellEnter*, *onClose* and *livePreview* options (thanks [jbergen](https://github.com/jbergen)).
