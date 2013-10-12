@@ -52,6 +52,12 @@ If you wish to programatically close a color chooser, use the closeChooser() fun
 $('.simple_color').closeChooser();
 ```
 
+If you wish to programatically set the color, use the setColor() function:
+
+```javascript
+$('.simple_color').setColor('#cc3333');
+```
+
 Options
 -------
 
@@ -176,6 +182,10 @@ Total time: 2 seconds
 Change history
 -----------
 
+* **Version 1.2.0 (2013-10-12)** :
+  * Fix line-height bug when boxHeight option is used.
+  * Fix color selection bug when chooser is closed without selecting a color.
+  * Add a setColor() method to select a color programatically.
 * **Version 1.1.5 (2013-10-12)** :
   * Add bower support.
   * Add displayCSS and chooserCSS options, and remove the border option.

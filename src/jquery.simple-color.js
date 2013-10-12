@@ -158,7 +158,7 @@
       'border':           '1px solid #000',
       'width':            options.boxWidth,
       'height':           options.boxHeight,
-      'line-height':      options.boxHeight,
+      'line-height':      options.boxHeight + 'px',
       'cursor':           'pointer'
     }, options.displayCSS || {});
 
@@ -193,10 +193,12 @@
 
       var displayBox = $("<div class='simpleColorDisplay' />");
       displayBox.css($.extend(options.displayCSS, { 'background-color': defaultColor }));
+      displayBox.data('color', defaultColor);
       container.append(displayBox);
 
       // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
       if (options.displayColorCode) {
+        displayBox.data('displayColorCode', true);
         displayBox.text(this.value);
         displayBox.css({
           'color':     options.colorCodeColor,
@@ -215,9 +217,9 @@
           // Makes sure the selected cell is within the current color chooser.
           var target = $(e.target);
           if (target.is('.simpleColorCell') === false || $.contains( $(event.target).closest('.simpleColorContainer')[0], target[0]) === false) {
-            displayBox.css('backgroundColor', defaultColor);
+            displayBox.css('background-color', displayBox.data('color'));
             if (options.displayColorCode) {
-              displayBox.text(defaultColor);
+              displayBox.text(displayBox.data('color'));
             }
           }
           // Execute onClose callback whenever the color chooser is closed.
@@ -243,14 +245,14 @@
           for (var i=0; i<options.colors.length; i++) {
             var cell = $("<div class='simpleColorCell' id='" + options.colors[i] + "'/>");
             cell.css({
-              'width':           options.cellWidth + 'px',
-              'height':          options.cellHeight + 'px',
-              'margin':          options.cellMargin + 'px',
-              'cursor':          'pointer',
-              'lineHeight':      options.cellHeight + 'px',
-              'fontSize':        '1px',
-              'float':           'left',
-              'backgroundColor': '#'+options.colors[i]
+              'width':            options.cellWidth + 'px',
+              'height':           options.cellHeight + 'px',
+              'margin':           options.cellMargin + 'px',
+              'cursor':           'pointer',
+              'lineHeight':       options.cellHeight + 'px',
+              'fontSize':         '1px',
+              'float':            'left',
+              'background-color': '#'+options.colors[i]
             });
             chooser.append(cell);
             if (options.onCellEnter || options.livePreview) {
@@ -259,7 +261,7 @@
                   options.onCellEnter(this.id, element);
                 }
                 if (options.livePreview) {
-                  displayBox.css('backgroundColor', '#' + this.id);
+                  displayBox.css('background-color', '#' + this.id);
                   if (options.displayColorCode) {
                     displayBox.text('#' + this.id);
                   }
@@ -272,15 +274,16 @@
               displayBox: displayBox
             },
             function(event) {
-              event.data.input.value = '#' + this.id;
+              var color = '#' + this.id
+              event.data.input.value = color;
               $(event.data.input).change();
-              event.data.displayBox.css('backgroundColor', '#' + this.id);
+              $(event.data.displayBox).data('color', color);
+              event.data.displayBox.css('background-color', color);
               event.data.chooser.hide();
-              event.data.displayBox.show();
 
               // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
               if (options.displayColorCode) {
-                event.data.displayBox.text('#' + this.id);
+                event.data.displayBox.text(color);
               }
 
               // If an onSelect callback function is defined then excecute it.
@@ -301,6 +304,7 @@
       displayBox.bind('click', callbackParams, selectCallback);
 
       $(this).after(container);
+      $(this).data('container', container);
     };
 
     this.each(buildChooser);
@@ -319,9 +323,22 @@
    */
   $.fn.closeChooser = function() {
     this.each( function(index) {
-      var container = $(this).parent().find('div.simpleColorContainer');
-      container.find('.simpleColorChooser').hide();
-      container.find('.simpleColorDisplay').show();
+      $(this).data('container').find('.simpleColorChooser').hide();
+    });
+
+    return this;
+  };
+
+  /*
+   * Set the color of the given color choosers.
+   */
+  $.fn.setColor = function(color) {
+    this.each( function(index) {
+      var displayBox = $(this).data('container').find('.simpleColorDisplay');
+      displayBox.css('background-color', color).data('color', color);
+      if (displayBox.data('displayColorCode') === true) {
+        displayBox.text(color);
+      }
     });
 
     return this;
