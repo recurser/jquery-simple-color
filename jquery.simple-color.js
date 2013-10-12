@@ -7,7 +7,7 @@
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Version: 1.1.5 (201310121307)
+ * Version: 1.1.5 (201310121310)
  */
  (function($) {
 /**
@@ -197,9 +197,7 @@
 
       // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
       if (options.displayColorCode) {
-        console.log(1);
         displayBox.text(this.value);
-        console.log(2);
         displayBox.css({
           'color':     options.colorCodeColor,
           'textAlign': options.colorCodeAlign
