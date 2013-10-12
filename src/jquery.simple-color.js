@@ -158,7 +158,7 @@
       'border':           '1px solid #000',
       'width':            options.boxWidth,
       'height':           options.boxHeight,
-      'line-height':      options.boxHeight,
+      'line-height':      options.boxHeight + 'px',
       'cursor':           'pointer'
     }, options.displayCSS || {});
 
@@ -197,7 +197,9 @@
 
       // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
       if (options.displayColorCode) {
+        console.log(1);
         displayBox.text(this.value);
+        console.log(2);
         displayBox.css({
           'color':     options.colorCodeColor,
           'textAlign': options.colorCodeAlign
