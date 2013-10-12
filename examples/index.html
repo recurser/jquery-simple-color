@@ -13,6 +13,10 @@ $(document).ready(function(){
     $('input').closeChooser();
   });
 
+  $('.set_color_button').click(function(event) {
+    $('input').setColor('#cc3333');
+  });
+
   $('.simple_color').simpleColor();
 
   $('.simple_color_color_code').simpleColor({ displayColorCode: true });
@@ -62,6 +66,7 @@ $(document).ready(function(){
 
 <body>
   <button class='close_button'>Close all color choosers</button>
+  <button class='set_color_button'>Set all to red</button>
 
   <h3>Basic</h3>
   <input class='simple_color' value='#cc3333'/>
