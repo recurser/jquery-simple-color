@@ -7,7 +7,7 @@
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Version: 1.1.5 (201310121310)
+ * Version: 1.2.0 (201310121342)
  */
  (function($) {
 /**
@@ -193,6 +193,7 @@
 
       var displayBox = $("<div class='simpleColorDisplay' />");
       displayBox.css($.extend(options.displayCSS, { 'background-color': defaultColor }));
+      displayBox.data('color', defaultColor);
       container.append(displayBox);
 
       // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
@@ -215,9 +216,9 @@
           // Makes sure the selected cell is within the current color chooser.
           var target = $(e.target);
           if (target.is('.simpleColorCell') === false || $.contains( $(event.target).closest('.simpleColorContainer')[0], target[0]) === false) {
-            displayBox.css('backgroundColor', defaultColor);
+            displayBox.css('backgroundColor', displayBox.data('color'));
             if (options.displayColorCode) {
-              displayBox.text(defaultColor);
+              displayBox.text(displayBox.data('color'));
             }
           }
           // Execute onClose callback whenever the color chooser is closed.
@@ -272,15 +273,16 @@
               displayBox: displayBox
             },
             function(event) {
-              event.data.input.value = '#' + this.id;
+              var color = '#' + this.id
+              event.data.input.value = color;
               $(event.data.input).change();
-              event.data.displayBox.css('backgroundColor', '#' + this.id);
+              $(event.data.displayBox).data('color', color);
+              event.data.displayBox.css('backgroundColor', color);
               event.data.chooser.hide();
-              event.data.displayBox.show();
 
               // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
               if (options.displayColorCode) {
-                event.data.displayBox.text('#' + this.id);
+                event.data.displayBox.text(color);
               }
 
               // If an onSelect callback function is defined then excecute it.
@@ -321,7 +323,6 @@
     this.each( function(index) {
       var container = $(this).parent().find('div.simpleColorContainer');
       container.find('.simpleColorChooser').hide();
-      container.find('.simpleColorDisplay').show();
     });
 
     return this;
