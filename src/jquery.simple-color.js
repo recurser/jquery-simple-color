@@ -7,7 +7,7 @@
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Version: @VERSION (@DATE)
+ * Version: <%= pkg.version %> (<%= meta.date %>)
  */
  (function($) {
 /**

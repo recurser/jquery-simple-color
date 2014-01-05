@@ -135,48 +135,7 @@ displayCSS:         An associative array of CSS properties that will be applied 
 Building From Scratch
 ---------------------
 
-You can build the regular, un-minified version simply by running _ant_:
-
-```bash
-$ ant
-Buildfile: build.xml
-
-jquery.simple-color:
-     [echo] Building ./jquery.simple-color.js
-     [echo] ./jquery.simple-color.js built.
-
-BUILD SUCCESSFUL
-Total time: 0 seconds
-```
-
-Before you can build the minified version yourself, you'll need to download the [Google Closure Compiler](http://closure-compiler.googlecode.com/files/compiler-latest.zip) and put it in a folder called _build_:
-
-```bash
-$ mkdir build
-$ cd build
-$ wget http://closure-compiler.googlecode.com/files/compiler-latest.zip
-$ unzip compiler-latest.zip
-```
-
-Once you have the compiler, you can build the minified version by running _ant min_:
-
-```bash
-$ ant min
-Buildfile: build.xml
-
-jquery.simple-color:
-     [echo] Building ./jquery.simple-color.js
-     [echo] ./jquery.simple-color.js built.
-
-min:
-     [echo] Building ./jquery.simple-color.min.js
-    [apply] Applied java to 1 file and 0 directories.
-   [delete] Deleting: /Users/dave/Documents/Code/jquery/jquery-simple-color/tmpmin
-     [echo] ./jquery.simple-color.min.js built.
-
-BUILD SUCCESSFUL
-Total time: 2 seconds
-```
+Use `npm install` to install the dependencies, and `grunt` to run the build.
 
 
 Change history
