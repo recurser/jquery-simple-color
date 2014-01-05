@@ -2,7 +2,7 @@
  * jQuery simple-color plugin
  * @requires jQuery v1.4.2 or later
  *
- * See http://recursive-design.com/projects/jquery-simple-color/
+ * See https://github.com/recurser/jquery-simple-color
  *
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
