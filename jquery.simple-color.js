@@ -217,7 +217,7 @@
         displayBox.data('displayColorCode', true);
         displayBox.text(this.value);
         displayBox.css({
-          'color':     options.colorCodeColor,
+          'color':     getTextColor(this.value),
           'textAlign': options.colorCodeAlign
         });
       }
