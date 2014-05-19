@@ -7,7 +7,7 @@
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Version: 1.2.1 (Sun, 05 Jan 2014 05:14:47 GMT)
+ * Version: 1.2.2 (Mon, 19 May 2014 20:22:47 GMT)
  */
  (function($) {
 /**
@@ -201,7 +201,7 @@
         displayBox.data('displayColorCode', true);
         displayBox.text(this.value);
         displayBox.css({
-          'color':     options.colorCodeColor,
+          'color':     getTextColor(this.value),
           'textAlign': options.colorCodeAlign
         });
       }
@@ -220,6 +220,9 @@
             displayBox.css('background-color', displayBox.data('color'));
             if (options.displayColorCode) {
               displayBox.text(displayBox.data('color'));
+			  displayBox.css({
+			    'color':     getTextColor(displayBox.data('color')),
+			  });
             }
           }
           // Execute onClose callback whenever the color chooser is closed.
@@ -284,6 +287,9 @@
               // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
               if (options.displayColorCode) {
                 event.data.displayBox.text(color);
+				event.data.displayBox.css({
+					'color':     getTextColor(displayBox.data('color'))
+				});
               }
 
               // If an onSelect callback function is defined then excecute it.
@@ -345,3 +351,24 @@
   };
 
 })(jQuery);
+
+function getTextColor(color){
+
+	rgbColor = hexToRgb(color);
+	textColor =
+		0.213 * rgbColor.r/255 +
+		0.715 * rgbColor.g/255 +
+		0.072 * rgbColor.b/255
+		< 0.5 ? '#FFFFFF' : '#000000';
+
+  return textColor;
+}
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
