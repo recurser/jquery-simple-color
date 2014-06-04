@@ -7,7 +7,7 @@
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Version: <%= pkg.version %> (<%= meta.date %>)
+ * Version: 1.2.1 (Sun, 05 Jan 2014 05:14:47 GMT)
  */
  (function($) {
 /**
@@ -44,6 +44,9 @@
  *
  *  displayColorCode:   Display the color code (eg #333333) as text inside the button. true or false.
  *                      Default value: false
+ *                      
+ *  reverseColorCode:   Reverse the color of the displayedColorCode. true or false.
+ *  					Default value: true
  *
  *  colorCodeAlign:     Text alignment used to display the color code inside the button. Only used if
  *                      'displayColorCode' is true. 'left', 'center' or 'right'
@@ -127,15 +130,16 @@
     // Option defaults
     options = $.extend({
       defaultColor:     this.attr('defaultColor') || '#FFF',
-      cellWidth:        this.attr('cellWidth') || 10,
-      cellHeight:       this.attr('cellHeight') || 10,
+      cellWidth:        this.attr('cellWidth') || 20,
+      cellHeight:       this.attr('cellHeight') || 20,
       cellMargin:       this.attr('cellMargin') || 1,
       boxWidth:         this.attr('boxWidth') || '115px',
       boxHeight:        this.attr('boxHeight') || '20px',
-      columns:          this.attr('columns') || 16,
+      columns:          this.attr('columns') || 9,
       insert:           this.attr('insert') || 'after',
       colors:           this.attr('colors') || defaultColors,
       displayColorCode: this.attr('displayColorCode') || false,
+      reverseColorCode: this.attr('reverseColorCode') || true,
       colorCodeAlign:   this.attr('colorCodeAlign') || 'center',
       colorCodeColor:   this.attr('colorCodeColor') || '#FFF',
       hideInput:        this.attr('hideInput') || true,
@@ -144,6 +148,7 @@
       onClose:          null,
       livePreview:      false
     }, options || {});
+
 
     // Figure out the cell dimensions
     options.totalWidth = options.columns * (options.cellWidth + (2 * options.cellMargin));
@@ -216,7 +221,9 @@
       if (options.displayColorCode) {
         displayBox.data('displayColorCode', true);
         displayBox.text(this.value);
-        displayBox.css({
+        if( options.reverseColorCode )
+        	options.colorCodeColor = reverse( this.value );
+        displayBox.css({	
           'color':     options.colorCodeColor,
           'textAlign': options.colorCodeAlign
         });
@@ -295,6 +302,8 @@
               $(event.data.input).change();
               $(event.data.displayBox).data('color', color);
               event.data.displayBox.css('background-color', color);
+              if( options.reverseColorCode )
+            	  event.data.displayBox.css('color',  '#'+reverse( this.id ) );
               event.data.chooser.hide();
 
               // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
@@ -361,3 +370,40 @@
   };
 
 })(jQuery);
+ 
+function reverse( color ){
+
+	var r = 0;
+	var g = 0;
+	var b = 0;
+	
+	if ( color.length == 4 || color.length == 7 )
+		color = color.substring(1,color.length);
+		
+	// 3 digits
+	if ( color.length == 3 ){
+		r = color.substring(0,1) + color.substring(0,1);
+		g = color.substring(1,2) + color.substring(1,2);
+		b = color.substring(2)   + color.substring(2);
+	}
+
+	// 6 digits
+	else {
+		r = color.substring(0,2);
+		g = color.substring(2,4);
+		b = color.substring(4);
+	}
+
+	r = ( 255 - parseInt(r, 16) ).toString(16);
+	g = ( 255 - parseInt(g, 16) ).toString(16);
+	b = ( 255 - parseInt(b, 16) ).toString(16);
+	
+	if ( r.length < 2 )
+		r = r+''+r;
+	if ( g.length < 2 )
+		g = g+''+g;
+	if ( b.length < 2 )
+		b = b+''+b;
+
+	return r+g+b;
+}
