@@ -7,7 +7,7 @@
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Version: 1.2.1 (Sun, 05 Jan 2014 05:14:47 GMT)
+ * Version: <%= pkg.version %> (<%= meta.date %>)
  */
  (function($) {
 /**
@@ -70,6 +70,9 @@
  *                      the chooser.
  *                      Default value: null
  *
+ *  inputHide           Form input show or hide.
+ *                      Default: true
+ *
  *  livePreview:        The color display will change to show the color of the hovered color cell.
  *                      The display will revert if no color is selected.
  *                      Default value: false
@@ -81,6 +84,10 @@
  *  displayCSS:         An associative array of CSS properties that will be applied to the color
  *                      display box.
  *                      Default value: see options.displayCSS in the source
+ *
+ *  inputCSS            An associative array of CSS properties that will be applied to the form input
+ *                      ex. {   'float':'left' }
+ * 
  */
   $.fn.simpleColor = function(options) {
 
@@ -131,6 +138,8 @@
       displayColorCode: this.attr('displayColorCode') || false,
       colorCodeAlign:   this.attr('colorCodeAlign') || 'center',
       colorCodeColor:   this.attr('colorCodeColor') || '#FFF',
+      inputHide:        this.attr('inputHide') || true,
+      inputCSS:         this.attr('inputCSS') || '',
       onSelect:         null,
       onCellEnter:      null,
       onClose:          null,
@@ -143,13 +152,14 @@
     // Custom CSS for the chooser, which relies on previously defined options.
     options.chooserCSS = $.extend({
       'border':           '1px solid #000',
-      'margin':           '0 0 0 5px',
-      'width':            options.totalWidth,
+      'margin':           '0 0 0 0px',
+      'width':            options.totalWidth+4,
       'height':           options.totalHeight,
       'top':              0,
       'left':             options.boxWidth,
       'position':         'absolute',
-      'background-color': '#fff'
+      'background-color': '#fff',
+      'z-index':          '3000' 
     }, options.chooserCSS || {});
 
     // Custom CSS for the display box, which relies on previously defined options.
@@ -162,8 +172,14 @@
       'cursor':           'pointer'
     }, options.displayCSS || {});
 
+    //Custom CSS input  
+    options.inputCSS = $.extend({}, options.inputCSS || {});
+
     // Hide the input
-    this.hide();
+    if(options.inputHide) this.hide();
+
+    //Css to INPUT
+    this.css(options.inputCSS);
 
     // this should probably do feature detection - I don't know why we need +2 for IE
     // but this works for jQuery 1.9.1
@@ -192,6 +208,7 @@
       var defaultColor = (this.value && this.value != '') ? this.value : options.defaultColor;
 
       var displayBox = $("<div class='simpleColorDisplay' />");
+       
       displayBox.css($.extend(options.displayCSS, { 'background-color': defaultColor }));
       displayBox.data('color', defaultColor);
       container.append(displayBox);
