@@ -7,7 +7,7 @@
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Version: 1.2.1 (Sun, 05 Jan 2014 05:14:47 GMT)
+ * Version: 1.2.1 (Sat, 19 Aug 2017 07:42:40 GMT)
  */
  (function($) {
 /**
@@ -70,6 +70,9 @@
  *                      the chooser.
  *                      Default value: null
  *
+ *  hideInput           If true, hides the original input when displaying the color picker.
+ *                      Default: true
+ *
  *  livePreview:        The color display will change to show the color of the hovered color cell.
  *                      The display will revert if no color is selected.
  *                      Default value: false
@@ -81,6 +84,10 @@
  *  displayCSS:         An associative array of CSS properties that will be applied to the color
  *                      display box.
  *                      Default value: see options.displayCSS in the source
+ *
+ *  inputCSS            An associative array of CSS properties that will be applied to the form input
+ *                      ex. {   'float':'left' }
+ *
  */
   $.fn.simpleColor = function(options) {
 
@@ -131,6 +138,7 @@
       displayColorCode: this.attr('displayColorCode') || false,
       colorCodeAlign:   this.attr('colorCodeAlign') || 'center',
       colorCodeColor:   this.attr('colorCodeColor') || '#FFF',
+      hideInput:        this.attr('hideInput') || true,
       onSelect:         null,
       onCellEnter:      null,
       onClose:          null,
@@ -162,10 +170,18 @@
       'cursor':           'pointer'
     }, options.displayCSS || {});
 
-    // Hide the input
-    this.hide();
+    // Custom CSS for the input field.
+    options.inputCSS = $.extend({}, options.inputCSS || {});
 
-    // this should probably do feature detection - I don't know why we need +2 for IE
+    if (options.hideInput) {
+      // Hide the input unless configured otherwise.
+      this.hide();
+    } else {
+      // Apply custom CSS to the input field if it is visible.
+      this.css(options.inputCSS);
+    }
+
+    // This should probably do feature detection - I don't know why we need +2 for IE
     // but this works for jQuery 1.9.1
     if (navigator.userAgent.indexOf("MSIE")!=-1){
       options.totalWidth += 2;
@@ -186,7 +202,7 @@
       var container = $("<div class='simpleColorContainer' />");
 
       // Absolutely positioned child elements now 'work'.
-			container.css('position', 'relative');
+      container.css('position', 'relative');
 
       // Create the color display box
       var defaultColor = (this.value && this.value != '') ? this.value : options.defaultColor;
