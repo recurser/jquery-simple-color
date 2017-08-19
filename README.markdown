@@ -101,7 +101,7 @@ colorCodeAlign:     Text alignment used to display the color code inside the but
 
 colorCodeColor:     Text color of the color code inside the button. Only used if 'displayColorCode'
                     is true.
-                     default value: '#FFF'
+                     default value: '#FFF' or '#000', decided based on the color selected in the chooser.
 
 onSelect:           Function to be called when a color is selected. The hex code is passed into the
                     function. The callback function will be passed two arguments - the hex code of
