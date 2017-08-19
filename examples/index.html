@@ -19,6 +19,8 @@ $(document).ready(function(){
 
   $('.simple_color').simpleColor();
 
+  $('.simple_color_show_input').simpleColor({ hideInput: false, inputCSS: { 'border-style': 'dashed', 'width': '111px', 'margin-bottom': '2px' } });
+
   $('.simple_color_color_code').simpleColor({ displayColorCode: true });
 
   $('.simple_color_custom_chooser_css').simpleColor({ chooserCSS: { 'background-color': 'black', 'opacity': '0.8' } });
@@ -70,6 +72,9 @@ $(document).ready(function(){
 
   <h3>Basic</h3>
   <input class='simple_color' value='#cc3333'/>
+
+  <h3>Display input field and customize field CSS</h3>
+  <input class='simple_color_show_input' value='#cc3333'/>
 
   <h3>Display Color Code</h3>
   <input class='simple_color_color_code' value='#33cc33'/>

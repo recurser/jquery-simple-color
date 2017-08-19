@@ -101,7 +101,7 @@ colorCodeAlign:     Text alignment used to display the color code inside the but
 
 colorCodeColor:     Text color of the color code inside the button. Only used if 'displayColorCode'
                     is true.
-                     default value: '#FFF'
+                     default value: '#FFF' or '#000', decided based on the color selected in the chooser.
 
 onSelect:           Function to be called when a color is selected. The hex code is passed into the
                     function. The callback function will be passed two arguments - the hex code of
@@ -118,6 +118,9 @@ onClose:            Callback function that executes when the chooser is closed. 
                     function will be passed one argument - the input element that triggered the chooser.
                      default value: null
 
+hideInput           If true, hides the original input when displaying the color picker.
+                     default value: true
+
 livePreview:        The color display will change to show the color currently under the mouse. The
                     display will revert if no color is selected.
                      default value: false
@@ -129,6 +132,9 @@ chooserCSS:         An associative array of CSS properties that will be applied 
 displayCSS:         An associative array of CSS properties that will be applied to the color display
                     box.
                     Default value: see options.chooserCSS in the source
+
+inputCSS            An associative array of CSS properties that will be applied to the form input.
+                    Default value: see options.inputCSS in the source
 
 ```
 
