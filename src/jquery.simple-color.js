@@ -87,7 +87,7 @@
  *
  *  inputCSS            An associative array of CSS properties that will be applied to the form input
  *                      ex. {   'float':'left' }
- * 
+ *
  */
   $.fn.simpleColor = function(options) {
 
@@ -159,7 +159,7 @@
       'left':             options.boxWidth,
       'position':         'absolute',
       'background-color': '#fff',
-      'z-index':          '3000' 
+      'z-index':          '3000'
     }, options.chooserCSS || {});
 
     // Custom CSS for the display box, which relies on previously defined options.
@@ -172,7 +172,7 @@
       'cursor':           'pointer'
     }, options.displayCSS || {});
 
-    //Custom CSS input  
+    //Custom CSS input
     options.inputCSS = $.extend({}, options.inputCSS || {});
 
     // Hide the input
@@ -208,7 +208,7 @@
       var defaultColor = (this.value && this.value != '') ? this.value : options.defaultColor;
 
       var displayBox = $("<div class='simpleColorDisplay' />");
-       
+
       displayBox.css($.extend(options.displayCSS, { 'background-color': defaultColor }));
       displayBox.data('color', defaultColor);
       container.append(displayBox);
