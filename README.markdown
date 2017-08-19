@@ -147,6 +147,11 @@ Use `npm install` to install the dependencies, and `grunt` to run the build.
 Change history
 -----------
 
+* **Version 1.2.2 (2017-08-19)** :
+  * Add adaptive text color (thanks [Fulligan](https://github.com/Fulligan)).
+  * Add hideInput and inputCSS options (thanks [graredcr](https://github.com/graredcr)).
+* **Version 1.2.1 (2013-10-12)** :
+  * Use grunt to build.
 * **Version 1.2.0 (2013-10-12)** :
   * Fix line-height bug when boxHeight option is used.
   * Fix color selection bug when chooser is closed without selecting a color.

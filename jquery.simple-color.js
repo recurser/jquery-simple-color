@@ -7,7 +7,7 @@
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Version: 1.2.1 (Sat, 19 Aug 2017 09:57:06 GMT)
+ * Version: 1.2.2 (Sat, 19 Aug 2017 10:03:14 GMT)
  */
  (function($) {
 /**
