@@ -118,8 +118,8 @@ onClose:            Callback function that executes when the chooser is closed. 
                     function will be passed one argument - the input element that triggered the chooser.
                      default value: null
 
-inputHide           Form input show or hide.
-                    Default: true
+hideInput           If true, hides the original input when displaying the color picker.
+                     default value: true
 
 livePreview:        The color display will change to show the color currently under the mouse. The
                     display will revert if no color is selected.
@@ -133,8 +133,8 @@ displayCSS:         An associative array of CSS properties that will be applied 
                     box.
                     Default value: see options.chooserCSS in the source
 
- inputCSS            An associative array of CSS properties that will be applied to the form input
-                     ex. {   'float':'left' }
+inputCSS            An associative array of CSS properties that will be applied to the form input.
+                    Default value: see options.inputCSS in the source
 
 ```
 

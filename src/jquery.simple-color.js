@@ -70,7 +70,7 @@
  *                      the chooser.
  *                      Default value: null
  *
- *  inputHide           Form input show or hide.
+ *  hideInput           If true, hides the original input when displaying the color picker.
  *                      Default: true
  *
  *  livePreview:        The color display will change to show the color of the hovered color cell.
@@ -138,8 +138,7 @@
       displayColorCode: this.attr('displayColorCode') || false,
       colorCodeAlign:   this.attr('colorCodeAlign') || 'center',
       colorCodeColor:   this.attr('colorCodeColor') || '#FFF',
-      inputHide:        this.attr('inputHide') || true,
-      inputCSS:         this.attr('inputCSS') || '',
+      hideInput:        this.attr('hideInput') || true,
       onSelect:         null,
       onCellEnter:      null,
       onClose:          null,
@@ -152,14 +151,13 @@
     // Custom CSS for the chooser, which relies on previously defined options.
     options.chooserCSS = $.extend({
       'border':           '1px solid #000',
-      'margin':           '0 0 0 0px',
-      'width':            options.totalWidth+4,
+      'margin':           '0 0 0 5px',
+      'width':            options.totalWidth,
       'height':           options.totalHeight,
       'top':              0,
       'left':             options.boxWidth,
       'position':         'absolute',
-      'background-color': '#fff',
-      'z-index':          '3000'
+      'background-color': '#fff'
     }, options.chooserCSS || {});
 
     // Custom CSS for the display box, which relies on previously defined options.
@@ -172,16 +170,18 @@
       'cursor':           'pointer'
     }, options.displayCSS || {});
 
-    //Custom CSS input
+    // Custom CSS for the input field.
     options.inputCSS = $.extend({}, options.inputCSS || {});
 
-    // Hide the input
-    if(options.inputHide) this.hide();
+    if (options.hideInput) {
+      // Hide the input unless configured otherwise.
+      this.hide();
+    } else {
+      // Apply custom CSS to the input field if it is visible.
+      this.css(options.inputCSS);
+    }
 
-    //Css to INPUT
-    this.css(options.inputCSS);
-
-    // this should probably do feature detection - I don't know why we need +2 for IE
+    // This should probably do feature detection - I don't know why we need +2 for IE
     // but this works for jQuery 1.9.1
     if (navigator.userAgent.indexOf("MSIE")!=-1){
       options.totalWidth += 2;
@@ -208,7 +208,6 @@
       var defaultColor = (this.value && this.value != '') ? this.value : options.defaultColor;
 
       var displayBox = $("<div class='simpleColorDisplay' />");
-
       displayBox.css($.extend(options.displayCSS, { 'background-color': defaultColor }));
       displayBox.data('color', defaultColor);
       container.append(displayBox);
