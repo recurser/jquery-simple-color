@@ -7,7 +7,7 @@
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Version: 1.2.2 (Mon, 19 May 2014 20:22:47 GMT)
+ * Version: 1.2.1 (Sat, 19 Aug 2017 09:57:06 GMT)
  */
  (function($) {
 /**
@@ -51,7 +51,7 @@
  *
  *  colorCodeColor:     Text color of the color code inside the button. Only used if 'displayColorCode'
  *                      is true.
- *                      Default value: '#FFF'
+ *                      Default value: '#FFF' or '#000', decided based on the color selected in the chooser.
  *
  *  onSelect:           Callback function to call after a color has been chosen. The callback
  *                      function will be passed two arguments - the hex code of the selected color,
@@ -89,6 +89,44 @@
  *                      ex. {   'float':'left' }
  *
  */
+
+
+  /**
+   * Decides if the text should be white or black, based on the chooser's selected color.
+   *
+   * @param {string} hexColor - The color selected in the chooser.
+   *
+   * @return {string} - Either #FFF or #000.
+   */
+  function getAdaptiveTextColor(hexColor) {
+    var matches = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hexColor);
+    if (!matches) return '#FFF';
+    var r       = parseInt(matches[1], 16);
+    var g       = parseInt(matches[2], 16);
+    var b       = parseInt(matches[3], 16);
+    var isWhite = (0.213 * r / 255) + (0.715 * g / 255) + (0.072 * b / 255) < 0.5;
+    return isWhite ? '#FFF' : '#000';
+  }
+
+  /**
+   * Sets the color of the given chooser, applying the given options.
+   *
+   * @param {Object} displayBox - jQuery-enhanced color display box element.
+   * @param {string} color      - The hex color that has been selected.
+   * @param {Object} options    - The options specified by the user.
+   */
+  var setColor = function(displayBox, color, options) {
+    var textColor = options.colorCodeColor || getAdaptiveTextColor(color);
+    displayBox.data('color', color).css({
+      color:           textColor,
+      textAlign:       options.colorCodeAlign,
+      backgroundColor: color
+    });
+    if (options.displayColorCode === true) {
+      displayBox.text(color);
+    }
+  }
+
   $.fn.simpleColor = function(options) {
 
     var element = this;
@@ -137,7 +175,7 @@
       colors:           this.attr('colors') || defaultColors,
       displayColorCode: this.attr('displayColorCode') || false,
       colorCodeAlign:   this.attr('colorCodeAlign') || 'center',
-      colorCodeColor:   this.attr('colorCodeColor') || '#FFF',
+      colorCodeColor:   this.attr('colorCodeColor') || false,
       hideInput:        this.attr('hideInput') || true,
       onSelect:         null,
       onCellEnter:      null,
@@ -208,19 +246,9 @@
       var defaultColor = (this.value && this.value != '') ? this.value : options.defaultColor;
 
       var displayBox = $("<div class='simpleColorDisplay' />");
-      displayBox.css($.extend(options.displayCSS, { 'background-color': defaultColor }));
-      displayBox.data('color', defaultColor);
+      displayBox.css(options.displayCSS);
+      setColor(displayBox, defaultColor, options);
       container.append(displayBox);
-
-      // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
-      if (options.displayColorCode) {
-        displayBox.data('displayColorCode', true);
-        displayBox.text(this.value);
-        displayBox.css({
-          'color':     getTextColor(this.value),
-          'textAlign': options.colorCodeAlign
-        });
-      }
 
       var selectCallback = function (event) {
         // Bind and namespace the click listener only when the chooser is
@@ -233,14 +261,9 @@
           // Makes sure the selected cell is within the current color chooser.
           var target = $(e.target);
           if (target.is('.simpleColorCell') === false || $.contains( $(event.target).closest('.simpleColorContainer')[0], target[0]) === false) {
-            displayBox.css('background-color', displayBox.data('color'));
-            if (options.displayColorCode) {
-              displayBox.text(displayBox.data('color'));
-			  displayBox.css({
-			    'color':     getTextColor(displayBox.data('color')),
-			  });
-            }
+            setColor(displayBox, displayBox.data('color'), options);
           }
+
           // Execute onClose callback whenever the color chooser is closed.
           if (options.onClose) {
             options.onClose(element);
@@ -280,10 +303,7 @@
                   options.onCellEnter(this.id, element);
                 }
                 if (options.livePreview) {
-                  displayBox.css('background-color', '#' + this.id);
-                  if (options.displayColorCode) {
-                    displayBox.text('#' + this.id);
-                  }
+                  setColor(displayBox, '#' + this.id, options);
                 }
               });
             }
@@ -296,16 +316,12 @@
               var color = '#' + this.id
               event.data.input.value = color;
               $(event.data.input).change();
-              $(event.data.displayBox).data('color', color);
-              event.data.displayBox.css('background-color', color);
+              setColor(displayBox, color, options);
               event.data.chooser.hide();
 
               // If 'displayColorCode' is turned on, display the currently selected color code as text inside the button.
               if (options.displayColorCode) {
                 event.data.displayBox.text(color);
-				event.data.displayBox.css({
-					'color':     getTextColor(displayBox.data('color'))
-				});
               }
 
               // If an onSelect callback function is defined then excecute it.
@@ -353,38 +369,16 @@
 
   /*
    * Set the color of the given color choosers.
+   *
+   * @param {string} color - The hex color to select in the chooser.
    */
   $.fn.setColor = function(color) {
     this.each( function(index) {
       var displayBox = $(this).data('container').find('.simpleColorDisplay');
-      displayBox.css('background-color', color).data('color', color);
-      if (displayBox.data('displayColorCode') === true) {
-        displayBox.text(color);
-      }
+      setColor(displayBox, color, options);
     });
 
     return this;
   };
 
 })(jQuery);
-
-function getTextColor(color){
-
-	rgbColor = hexToRgb(color);
-	textColor =
-		0.213 * rgbColor.r/255 +
-		0.715 * rgbColor.g/255 +
-		0.072 * rgbColor.b/255
-		< 0.5 ? '#FFFFFF' : '#000000';
-
-  return textColor;
-}
-
-function hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
-    } : null;
-}
