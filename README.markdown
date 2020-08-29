@@ -147,6 +147,8 @@ Use `npm install` to install the dependencies, and `grunt` to run the build.
 Change history
 -----------
 
+* **Version 1.2.3 (2020-08-29)** :
+  * Fix bug in the `setColor` method (thanks [al42and](https://github.com/al42and)).
 * **Version 1.2.2 (2017-08-19)** :
   * Add adaptive text color (thanks [Fulligan](https://github.com/Fulligan)).
   * Add hideInput and inputCSS options (thanks [graredcr](https://github.com/graredcr)).

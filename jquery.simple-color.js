@@ -7,7 +7,7 @@
  * Licensed under the MIT license:
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Version: 1.2.2 (Sat, 19 Aug 2017 10:03:14 GMT)
+ * Version: 1.2.3 (Sat, 29 Aug 2020 11:55:25 GMT)
  */
  (function($) {
 /**
@@ -375,7 +375,7 @@
   $.fn.setColor = function(color) {
     this.each( function(index) {
       var displayBox = $(this).data('container').find('.simpleColorDisplay');
-      setColor(displayBox, color, options);
+      setColor(displayBox, color, { displayColorCode: displayBox.data('displayColorCode') });
     });
 
     return this;

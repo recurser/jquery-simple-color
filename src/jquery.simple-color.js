@@ -375,7 +375,7 @@
   $.fn.setColor = function(color) {
     this.each( function(index) {
       var displayBox = $(this).data('container').find('.simpleColorDisplay');
-      setColor(displayBox, color, options);
+      setColor(displayBox, color, { displayColorCode: displayBox.data('displayColorCode') });
     });
 
     return this;
